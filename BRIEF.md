@@ -1,22 +1,22 @@
 # Brief — Website Company Profile PT Pangudi Utama Berjaya (PUB)
 
 > Dokumen kerja. Bagian **Status** di bawah di-update setiap fase selesai.
-> Terakhir diperbarui: 2026-11-02
+> Terakhir diperbarui: 2026-11-03
 
 ---
 
 ## Status
 
-| #   | Fase                                               | Status           | Catatan                                                           |
-| --- | -------------------------------------------------- | ---------------- | ----------------------------------------------------------------- |
-| 0   | Ekstraksi konten dari PDF                          | ✅ Selesai       | 9 halaman dibaca, lihat bagian Konten                             |
-| 1   | Brief (dokumen ini)                                | ✅ Selesai       |                                                                   |
-| 2a  | Setup repo + boilerplate Next.js                   | ✅ Selesai       | Next.js 16.4.4, React 19.3, Tailwind 4.3, pnpm 12. Push ke `main` |
-| 2b  | Hubungkan repo ke Vercel                           | 🟡 Menunggu user | Dilakukan manual oleh user                                        |
-| 3   | Design direction (agent Designer, impeccable)      | ⏳ Belum         | Output: `DESIGN.md` + token                                       |
-| 4   | Build halaman (agent Builder, mini loop)           | ⏳ Belum         | Per halaman, lihat Sitemap                                        |
-| 5   | Review akhir (a11y, performa, impeccable critique) | ⏳ Belum         |                                                                   |
-| 6   | Deploy preview ke Vercel                           | ⏳ Belum         |                                                                   |
+| #   | Fase                                               | Status           | Catatan                                                                       |
+| --- | -------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------- |
+| 0   | Ekstraksi konten dari PDF                          | ✅ Selesai       | 9 halaman dibaca, lihat bagian Konten                                         |
+| 1   | Brief (dokumen ini)                                | ✅ Selesai       |                                                                               |
+| 2a  | Setup repo + boilerplate Next.js                   | ✅ Selesai       | Next.js 16.4.4, React 19.3, Tailwind 4.3, pnpm 12. Push ke `main`             |
+| 2b  | Hubungkan repo ke Vercel                           | ✅ Selesai       | https://pub-comprof.vercel.app/ (dikerjakan user)                             |
+| 3   | Design direction (impeccable)                      | ✅ Selesai       | `PRODUCT.md`, `DESIGN.md`. Arah: lembar swatch berkode warna                  |
+| 4   | Build halaman (mini loop)                          | ✅ Selesai       | 11 URL statis, lint/typecheck/build lolos, detector impeccable bersih         |
+| 5   | Review akhir (a11y, performa, impeccable critique) | 🟡 Sebagian      | Belum: review agent terpisah, Lighthouse, cek visual semua halaman di desktop |
+| 6   | Deploy ke Vercel                                   | 🟡 Menunggu push | Otomatis dari `main`                                                          |
 
 Legenda: ✅ selesai · 🟡 berjalan/menunggu · ⏳ belum · ⛔ blocked
 
