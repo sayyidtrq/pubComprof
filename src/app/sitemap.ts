@@ -6,9 +6,7 @@ const base = "https://pub-comprof.vercel.app";
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     "",
-    "/tentang-kami/profil",
-    "/tentang-kami/visi-misi",
-    "/tentang-kami/struktur-organisasi",
+    "/tentang-kami",
     "/produk-layanan",
     ...categories.map((c) => `/produk-layanan/${c.slug}`),
     "/galeri",

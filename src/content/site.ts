@@ -26,13 +26,13 @@ export const nav = [
   { label: "Beranda", href: "/" },
   {
     label: "Tentang Kami",
-    href: "/tentang-kami/profil",
+    href: "/tentang-kami",
     children: [
-      { label: "Profil Perusahaan", href: "/tentang-kami/profil" },
-      { label: "Visi & Misi", href: "/tentang-kami/visi-misi" },
+      { label: "Profil Perusahaan", href: "/tentang-kami#profil" },
+      { label: "Visi & Misi", href: "/tentang-kami#visi-misi" },
       {
         label: "Struktur Organisasi",
-        href: "/tentang-kami/struktur-organisasi",
+        href: "/tentang-kami#struktur-organisasi",
       },
     ],
   },

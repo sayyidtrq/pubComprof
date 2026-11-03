@@ -41,10 +41,10 @@ Legenda: ✅ selesai · 🟡 berjalan/menunggu · ⏳ belum · ⛔ blocked
 
 ```
 /                               Beranda
-/tentang-kami                   (dropdown di navbar)
-  ├─ /tentang-kami/profil             Profil Perusahaan + identitas
-  ├─ /tentang-kami/visi-misi          Visi & 4 Misi
-  └─ /tentang-kami/struktur-organisasi Struktur organisasi
+/tentang-kami                   Satu halaman, tiga section (dropdown navbar = anchor)
+  ├─ #profil                          Profil Perusahaan + identitas
+  ├─ #visi-misi                       Visi & 4 Misi
+  └─ #struktur-organisasi             Struktur organisasi
 /produk-layanan                 Produk & Layanan (4 kategori + keunggulan)
   └─ /produk-layanan/[kategori]       Detail kategori (katalog foto)
 /galeri                         Galeri "Ragam Barang yang Kami Pasok"

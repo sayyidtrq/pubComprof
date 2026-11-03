@@ -83,7 +83,7 @@ export default function Home() {
                 mengumpulkan penawaran dari belasan pemasok.
               </p>
               <Link
-                href="/tentang-kami/profil"
+                href="/tentang-kami#profil"
                 className="decoration-yellow hover:decoration-navy mt-6 inline-block font-bold underline decoration-2"
               >
                 Baca profil perusahaan

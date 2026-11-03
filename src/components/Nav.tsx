@@ -98,9 +98,7 @@ export function Nav() {
                           <Link
                             href={c.href}
                             className="block px-4 py-2.5 text-sm font-semibold hover:bg-white"
-                            aria-current={
-                              pathname === c.href ? "page" : undefined
-                            }
+                            onClick={() => setAboutFor(null)}
                           >
                             {c.label}
                           </Link>
@@ -155,6 +153,7 @@ export function Nav() {
               <li key={item.label}>
                 <Link
                   href={item.href}
+                  onClick={() => setMobileFor(null)}
                   className="block py-3 text-base font-semibold"
                 >
                   {item.label}
@@ -165,6 +164,7 @@ export function Nav() {
                       <li key={c.href}>
                         <Link
                           href={c.href}
+                          onClick={() => setMobileFor(null)}
                           className="block py-2 text-sm text-white/85"
                         >
                           {c.label}
