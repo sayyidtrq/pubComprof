@@ -51,6 +51,7 @@ export function Nav() {
         <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-2 lg:px-8">
           <a
             className="inline-flex items-center gap-2"
+            tabIndex={-1}
             href={site.contact.phoneHref}
           >
             <Phone size={15} aria-hidden="true" />

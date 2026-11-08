@@ -33,6 +33,9 @@ Pembelian rutin bulanan (bukan sekali beli). Penawaran, faktur, dan rekap pembel
 
 ## Brand Commitments
 
+- Ketetapan klien dari papan Canva: teal #0c89a5, lavender #b6ace8, kuning #f8e01a, navy #2a397a; font Hanken Grotesk dan Poppins. Teal teks/tombol memakai #0a7690 untuk kontras AA.
+- Situs acuan klien: [Hamasa Iparna Mandiri](https://hamasaiparnamandiri.co.id) dan [Bangkit Perkasa Sukses](https://bangkitperkasa.com). Detail keputusan di [penyelarasan](docs/penyelarasan.md).
+
 - Nama: PT Pangudi Utama Berjaya, singkatan PUB.
 - Logo: huruf PUB tiga dimensi (P lavender, U kuning, B teal) dengan siluet jembatan biru dan tulisan serif "PT Pangudi Utama Berjaya". Ada di COMPRO_PT PUB_2026.pdf halaman 1.
 - Tagline: "Alat Tulis Kantor, Satu Pintu."

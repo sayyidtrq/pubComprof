@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Phone, MessageCircle, Mail, MapPin } from "lucide-react";
 import { Container, PageHeader } from "@/components/PageHeader";
-import { contactCopy, site, ui } from "@/content/site";
-export const metadata: Metadata = { title: ui.contact };
+import { contactCopy, site, ui, nav } from "@/content/site";
+export const metadata: Metadata = { title: nav[5].label };
 export default function KontakPage() {
   return (
     <>

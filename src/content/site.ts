@@ -71,12 +71,12 @@ export const categories: Category[] = [
       {
         src: "/images/catalog/gel-retractable.webp",
         alt: "Pulpen gel tekan merah dan biru",
-        name: "Pulpen gel tekan merah dan biru",
+        name: "Pulpen gel tekan",
       },
       {
         src: "/images/catalog/gel-classic.webp",
         alt: "Pulpen gel hitam Classic dalam kotak",
-        name: "Pulpen gel hitam Classic dalam kotak",
+        name: "Pulpen gel Classic",
       },
       {
         src: "/images/catalog/gel-refill.webp",
@@ -91,7 +91,7 @@ export const categories: Category[] = [
       {
         src: "/images/catalog/marker-permanen.webp",
         alt: "Spidol permanen hitam, satu kotak",
-        name: "Spidol permanen hitam, satu kotak",
+        name: "Spidol permanen",
       },
       {
         src: "/images/catalog/spidol-whiteboard.webp",
@@ -116,7 +116,7 @@ export const categories: Category[] = [
       {
         src: "/images/catalog/metallic-brush-pen.webp",
         alt: "Metallic brush pen emas, perak, putih",
-        name: "Metallic brush pen emas, perak, putih",
+        name: "Metallic brush pen",
       },
       {
         src: "/images/catalog/pen-metalik.webp",
@@ -126,7 +126,7 @@ export const categories: Category[] = [
       {
         src: "/images/catalog/penghapus-ujian.webp",
         alt: "Penghapus 2B untuk ujian",
-        name: "Penghapus 2B untuk ujian",
+        name: "Penghapus 2B",
       },
       {
         src: "/images/catalog/correction-tape.webp",
@@ -147,12 +147,12 @@ export const categories: Category[] = [
       {
         src: "/images/catalog/notebook.webp",
         alt: "Notebook sampul keras ukuran A4, A5, B5",
-        name: "Notebook sampul keras ukuran A4, A5, B5",
+        name: "Notebook sampul keras",
       },
       {
         src: "/images/catalog/notebook-spiral.webp",
         alt: "Notebook A5 spiral atas",
-        name: "Notebook A5 spiral atas",
+        name: "Notebook spiral",
       },
       {
         src: "/images/catalog/buku-tulis.webp",
@@ -162,7 +162,7 @@ export const categories: Category[] = [
       {
         src: "/images/catalog/legal-pad.webp",
         alt: "Legal pad ukuran A4, A5, B5",
-        name: "Legal pad ukuran A4, A5, B5",
+        name: "Legal pad",
       },
     ],
   },
@@ -178,7 +178,7 @@ export const categories: Category[] = [
       {
         src: "/images/catalog/map-folder.webp",
         alt: "Map folder warna-warni",
-        name: "Map folder warna-warni",
+        name: "Map folder",
       },
       {
         src: "/images/catalog/folder-warna.webp",
@@ -204,7 +204,7 @@ export const categories: Category[] = [
       {
         src: "/images/gallery/paket-set-kantor.webp",
         alt: "Paket set perlengkapan kantor warna merah muda",
-        name: "Paket set perlengkapan kantor warna merah muda",
+        name: "Paket set perlengkapan kantor",
       },
       {
         src: "/images/catalog/pencil-case.webp",
@@ -387,7 +387,7 @@ export const ui = {
   addressLabel: "Alamat",
   pages: "Halaman",
   serving: "Melayani",
-  copyright: "� 2026",
+  copyright: "© 2026",
   profile: "Profil Perusahaan",
   identity: "Identitas perusahaan",
   vision: "Visi",

@@ -66,11 +66,7 @@ export default function TentangKamiPage() {
                       {k}
                     </dt>
                     <dd className="mt-1 font-medium">
-                      {k === ui.phoneLabel.replace(" admin", "") ? (
-                        <a href={site.contact.phoneHref}>{v}</a>
-                      ) : (
-                        v
-                      )}
+                      {i === 4 ? <a href={site.contact.phoneHref}>{v}</a> : v}
                     </dd>
                   </div>
                 );

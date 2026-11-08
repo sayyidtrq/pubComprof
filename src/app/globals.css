@@ -180,6 +180,15 @@ a {
   .marquee-track > div {
     flex-wrap: wrap;
     white-space: normal;
+    width: 100%;
+    min-width: 0;
+    gap: 1rem;
+    padding-inline: 1rem;
+  }
+  .marquee-track > div > span {
+    max-width: 100%;
+    gap: 1rem;
+    padding-right: 0;
   }
   * {
     transition-duration: 0.01ms !important;
