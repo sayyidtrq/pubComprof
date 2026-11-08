@@ -1,62 +1,65 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Container, PageHeader } from "@/components/PageHeader";
-import { categories, galleryNote, galleryItems } from "@/content/site";
-
-export const metadata: Metadata = { title: "Galeri" };
-
+import { categories, galleryNote, galleryItems, ui } from "@/content/site";
+import { toneStyles } from "@/content/tones";
+export const metadata: Metadata = { title: ui.gallery };
 export default function GaleriPage() {
   return (
     <>
       <PageHeader
-        title="Ragam Barang yang Kami Pasok"
+        title={ui.galleryTitle}
         lead={galleryNote}
-        tone="navy"
+        crumbs={[{ label: ui.home, href: "/" }, { label: ui.gallery }]}
       />
-      <section className="py-12 sm:py-16">
-        <Container className="grid gap-4 md:grid-cols-4">
+      <section className="section">
+        <Container className="grid gap-5 md:grid-cols-4">
           {galleryItems.map((it) => (
             <figure
               key={it.src}
-              className={`bg-white ${it.big ? "md:col-span-2 md:row-span-2" : ""}`}
+              className={`card flex flex-col p-3 ${it.big ? "md:col-span-2 md:row-span-2" : ""}`}
             >
-              <Image
-                src={it.src}
-                alt={it.alt}
-                width={it.w}
-                height={it.h}
-                sizes={
-                  it.big
-                    ? "(min-width:768px) 50vw, 100vw"
-                    : "(min-width:768px) 25vw, 100vw"
-                }
-                className="h-auto w-full"
-              />
-              <figcaption className="p-4">
-                <span className="font-heading text-xl">{it.title}</span>
+              <div
+                className={`relative overflow-hidden rounded-xl ${it.big ? "aspect-[4/3] md:flex-1" : "aspect-[16/10]"}`}
+              >
+                <Image
+                  src={it.src}
+                  alt={it.alt}
+                  fill
+                  sizes={
+                    it.big
+                      ? "(min-width:768px) 45vw, 90vw"
+                      : "(min-width:768px) 23vw, 90vw"
+                  }
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="px-2 py-4">
+                <h2 className="h-card">{it.title}</h2>
                 {it.text && (
-                  <span className="text-muted mt-1 block text-sm">
-                    {it.text}
-                  </span>
+                  <p className="text-muted mt-2 text-sm">{it.text}</p>
                 )}
               </figcaption>
             </figure>
           ))}
         </Container>
-        <Container className="mt-14">
-          <h2 className="h-section text-3xl">Katalog foto per kategori</h2>
-          <ul className="mt-6 flex flex-wrap gap-3">
+        <Container className="mt-12">
+          <h2 className="h-section">{ui.galleryCatalog}</h2>
+          <nav
+            aria-label={ui.categoryNav}
+            className="mt-6 flex flex-wrap gap-2"
+          >
             {categories.map((c) => (
-              <li key={c.slug}>
-                <a
-                  href={`/produk-layanan/${c.slug}`}
-                  className={`${{ teal: "text-navy bg-teal-50", navy: "bg-navy-50 text-navy", lavender: "bg-lavender-50 text-navy", yellow: "text-navy bg-yellow-50" }[c.tone]} block px-5 py-3 font-bold hover:brightness-95`}
-                >
-                  {c.name}
-                </a>
-              </li>
+              <Link
+                key={c.slug}
+                href={`/produk-layanan/${c.slug}`}
+                className={`chip text-navy min-h-11 ${toneStyles[c.tone].tint}`}
+              >
+                {c.name}
+              </Link>
             ))}
-          </ul>
+          </nav>
         </Container>
       </section>
     </>

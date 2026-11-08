@@ -1,59 +1,96 @@
 import type { Metadata } from "next";
+import { Phone, MessageCircle, Mail, MapPin } from "lucide-react";
 import { Container, PageHeader } from "@/components/PageHeader";
-import { contactCopy, site } from "@/content/site";
-
-export const metadata: Metadata = { title: "Kontak" };
-
+import { contactCopy, site, ui } from "@/content/site";
+export const metadata: Metadata = { title: ui.contact };
 export default function KontakPage() {
   return (
     <>
-      <PageHeader title="Talk To Us" lead={contactCopy.lead} tone="yellow" />
-      <section className="py-14 sm:py-20">
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
-          <div>
-            <p className="measure text-lg">{contactCopy.body}</p>
-            <dl className="divide-line border-line mt-8 divide-y border-y">
-              <div className="py-4">
-                <dt className="font-heading text-muted text-sm">
-                  Telepon admin
-                </dt>
-                <dd>
+      <PageHeader title={ui.contact} lead={contactCopy.lead} />
+      <section className="section">
+        <Container>
+          <p className="measure text-muted text-lg">{contactCopy.body}</p>
+          <dl className="mt-9 grid gap-5 sm:grid-cols-2">
+            <div className="card p-6">
+              <dt className="font-heading flex items-center gap-3 font-semibold">
+                <Phone size={24} className="text-teal-700" aria-hidden="true" />
+                {ui.phoneLabel}
+              </dt>
+              <dd className="mt-4">
+                <a
+                  href={site.contact.phoneHref}
+                  className="font-heading text-2xl font-semibold text-teal-700 underline"
+                >
+                  {site.contact.phone}
+                </a>
+              </dd>
+            </div>
+            <div className="card p-6">
+              <dt className="font-heading flex items-center gap-3 font-semibold">
+                <MessageCircle
+                  size={24}
+                  className="text-teal-700"
+                  aria-hidden="true"
+                />
+                {ui.whatsappLabel}
+              </dt>
+              <dd className="text-muted mt-4">
+                {site.contact.whatsappHref ? (
                   <a
-                    href={site.contact.phoneHref}
-                    className="font-heading decoration-yellow text-4xl underline decoration-4"
+                    href={site.contact.whatsappHref}
+                    className="text-teal-700 underline"
                   >
-                    {site.contact.phone}
+                    {ui.whatsapp}
                   </a>
-                </dd>
-              </div>
-              <div className="py-4">
-                <dt className="font-heading text-muted text-sm">WhatsApp</dt>
-                <dd>{site.contact.whatsapp}</dd>
-              </div>
-              <div className="py-4">
-                <dt className="font-heading text-muted text-sm">Email</dt>
-                <dd>{site.contact.email}</dd>
-              </div>
-              <div className="py-4">
-                <dt className="font-heading text-muted text-sm">Alamat</dt>
-                <dd>
-                  <address className="not-italic">
-                    {site.contact.address}
-                  </address>
-                </dd>
-              </div>
-            </dl>
-            <p className="font-heading mt-8 text-2xl">{site.closing}</p>
-          </div>
-          <div className="min-h-96 bg-white">
+                ) : (
+                  ui.availableSoon
+                )}
+              </dd>
+            </div>
+            <div className="card p-6">
+              <dt className="font-heading flex items-center gap-3 font-semibold">
+                <Mail size={24} className="text-teal-700" aria-hidden="true" />
+                {ui.emailLabel}
+              </dt>
+              <dd className="text-muted mt-4">
+                {site.contact.emailHref ? (
+                  <a
+                    href={site.contact.emailHref}
+                    className="text-teal-700 underline"
+                  >
+                    {site.contact.email}
+                  </a>
+                ) : (
+                  ui.availableSoon
+                )}
+              </dd>
+            </div>
+            <div className="card p-6">
+              <dt className="font-heading flex items-center gap-3 font-semibold">
+                <MapPin
+                  size={24}
+                  className="text-teal-700"
+                  aria-hidden="true"
+                />
+                {ui.addressLabel}
+              </dt>
+              <dd className="mt-4">
+                <address className="not-italic">{site.contact.address}</address>
+              </dd>
+            </div>
+          </dl>
+          <div className="card mt-10 overflow-hidden">
             <iframe
-              title="Peta lokasi PT Pangudi Utama Berjaya"
+              title={ui.mapTitle}
               src={site.contact.mapsEmbed}
-              className="h-full min-h-96 w-full border-0"
+              className="h-[400px] w-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
+          <p className="font-heading mt-9 max-w-3xl text-xl font-semibold sm:text-2xl">
+            {site.closing}
+          </p>
         </Container>
       </section>
     </>
