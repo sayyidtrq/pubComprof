@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <section className="bg-navy text-white">
-        <Container className="grid items-center gap-12 py-14 sm:py-20 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:py-24">
+        <Container className="grid min-w-0 items-center gap-12 py-14 sm:py-20 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:py-24 [&>*]:min-w-0">
           <div>
             <p className="font-heading text-lg text-white/70">
               Company Profile 2026
@@ -40,7 +40,7 @@ export default function Home() {
             </p>
           </div>
 
-          <ul className="flex flex-col gap-3 lg:pl-6">
+          <ul className="flex min-w-0 flex-col gap-3 lg:pl-6">
             {categories.map((c, i) => (
               <li
                 key={c.slug}
