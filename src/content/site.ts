@@ -11,6 +11,9 @@ export const site = {
   since: "[PLACEHOLDER: tahun berdiri]",
   area: "Surabaya & Jawa Timur",
   contact: {
+    addressShort: "Jl. Panggung No. 5, Surabaya",
+    whatsappHref: null as string | null,
+    emailHref: null as string | null,
     phone: "(031) 352 2352",
     phoneHref: "tel:+62313522352",
     whatsapp: "[PLACEHOLDER: nomor WhatsApp]",
@@ -42,7 +45,7 @@ export const nav = [
   { label: "Kontak", href: "/kontak" },
 ] as const;
 
-export type Tone = "teal" | "blue" | "lavender" | "yellow";
+export type Tone = "teal" | "navy" | "lavender" | "yellow";
 
 export type Category = {
   slug: string;
@@ -52,7 +55,7 @@ export type Category = {
   items: string;
   image: string;
   imageAlt: string;
-  catalog: { src: string; alt: string }[];
+  catalog: { src: string; alt: string; name: string }[];
 };
 
 export const categories: Category[] = [
@@ -68,50 +71,75 @@ export const categories: Category[] = [
       {
         src: "/images/catalog/gel-retractable.webp",
         alt: "Pulpen gel tekan merah dan biru",
+        name: "Pulpen gel tekan",
       },
       {
         src: "/images/catalog/gel-classic.webp",
         alt: "Pulpen gel hitam Classic dalam kotak",
+        name: "Pulpen gel Classic",
       },
-      { src: "/images/catalog/gel-refill.webp", alt: "Isi ulang pulpen gel" },
-      { src: "/images/catalog/gel-navy.webp", alt: "Pulpen gel biru tua" },
+      {
+        src: "/images/catalog/gel-refill.webp",
+        alt: "Isi ulang pulpen gel",
+        name: "Isi ulang pulpen gel",
+      },
+      {
+        src: "/images/catalog/gel-navy.webp",
+        alt: "Pulpen gel biru tua",
+        name: "Pulpen gel biru tua",
+      },
       {
         src: "/images/catalog/marker-permanen.webp",
         alt: "Spidol permanen hitam, satu kotak",
+        name: "Spidol permanen",
       },
       {
         src: "/images/catalog/spidol-whiteboard.webp",
         alt: "Spidol papan tulis",
+        name: "Spidol papan tulis",
       },
       {
         src: "/images/catalog/marker-tiga-warna.webp",
         alt: "Spidol tiga warna",
+        name: "Spidol tiga warna",
       },
       {
         src: "/images/catalog/marker-set-warna.webp",
         alt: "Satu set spidol warna",
+        name: "Satu set spidol warna",
       },
       {
         src: "/images/catalog/marker-warna-cerah.webp",
         alt: "Spidol warna cerah",
+        name: "Spidol warna cerah",
       },
       {
         src: "/images/catalog/metallic-brush-pen.webp",
         alt: "Metallic brush pen emas, perak, putih",
+        name: "Metallic brush pen",
       },
-      { src: "/images/catalog/pen-metalik.webp", alt: "Pulpen metalik" },
+      {
+        src: "/images/catalog/pen-metalik.webp",
+        alt: "Pulpen metalik",
+        name: "Pulpen metalik",
+      },
       {
         src: "/images/catalog/penghapus-ujian.webp",
         alt: "Penghapus 2B untuk ujian",
+        name: "Penghapus 2B",
       },
-      { src: "/images/catalog/correction-tape.webp", alt: "Correction tape" },
+      {
+        src: "/images/catalog/correction-tape.webp",
+        alt: "Correction tape",
+        name: "Correction tape",
+      },
     ],
   },
   {
     slug: "kertas-cetak",
     code: "K",
     name: "Kertas & cetak",
-    tone: "blue",
+    tone: "navy",
     items: "HVS A4/F4, continuous form, kertas thermal, nota.",
     image: "/images/gallery/kertas-cetak.webp",
     imageAlt: "Tumpukan kardus kertas HVS Copy Paper",
@@ -119,15 +147,22 @@ export const categories: Category[] = [
       {
         src: "/images/catalog/notebook.webp",
         alt: "Notebook sampul keras ukuran A4, A5, B5",
+        name: "Notebook sampul keras",
       },
       {
         src: "/images/catalog/notebook-spiral.webp",
         alt: "Notebook A5 spiral atas",
+        name: "Notebook spiral",
       },
-      { src: "/images/catalog/buku-tulis.webp", alt: "Buku tulis bergambar" },
+      {
+        src: "/images/catalog/buku-tulis.webp",
+        alt: "Buku tulis bergambar",
+        name: "Buku tulis bergambar",
+      },
       {
         src: "/images/catalog/legal-pad.webp",
         alt: "Legal pad ukuran A4, A5, B5",
+        name: "Legal pad",
       },
     ],
   },
@@ -140,12 +175,21 @@ export const categories: Category[] = [
     image: "/images/gallery/filing-arsip.webp",
     imageAlt: "Map filing berwarna-warni",
     catalog: [
-      { src: "/images/catalog/map-folder.webp", alt: "Map folder warna-warni" },
+      {
+        src: "/images/catalog/map-folder.webp",
+        alt: "Map folder warna-warni",
+        name: "Map folder",
+      },
       {
         src: "/images/catalog/folder-warna.webp",
         alt: "Folder dengan kertas catatan",
+        name: "Folder dengan kertas catatan",
       },
-      { src: "/images/catalog/pouch.webp", alt: "Pouch dokumen" },
+      {
+        src: "/images/catalog/pouch.webp",
+        alt: "Pouch dokumen",
+        name: "Pouch dokumen",
+      },
     ],
   },
   {
@@ -160,8 +204,13 @@ export const categories: Category[] = [
       {
         src: "/images/gallery/paket-set-kantor.webp",
         alt: "Paket set perlengkapan kantor warna merah muda",
+        name: "Paket set perlengkapan kantor",
       },
-      { src: "/images/catalog/pencil-case.webp", alt: "Pencil case" },
+      {
+        src: "/images/catalog/pencil-case.webp",
+        alt: "Pencil case",
+        name: "Pencil case",
+      },
     ],
   },
 ];
@@ -171,18 +220,22 @@ export const alsoAvailable =
 
 export const strengths = [
   {
+    icon: "store",
     title: "Satu pintu",
     text: "Ratusan SKU dari banyak merek dalam satu pesanan.",
   },
   {
+    icon: "badge",
     title: "Harga bersaing",
     text: "Pembelian langsung dari distributor dan principal.",
   },
   {
+    icon: "truck",
     title: "Antar terjadwal",
     text: "Pengiriman rutin sesuai jadwal belanja bulanan.",
   },
   {
+    icon: "file",
     title: "Administrasi rapi",
     text: "Penawaran, faktur, dan rekap pembelian siap audit.",
   },
@@ -215,18 +268,22 @@ export const vision = {
 
 export const missions = [
   {
+    icon: "store",
     title: "Katalog lengkap, stok terjaga",
     text: "Menyediakan rangkaian ATK yang lengkap dan mutakhir, dengan ketersediaan stok yang konsisten untuk kebutuhan rutin pelanggan.",
   },
   {
+    icon: "badge",
     title: "Harga yang masuk anggaran",
     text: "Menjaga harga tetap kompetitif melalui pembelian langsung ke distributor dan pengelolaan rantai pasok yang efisien.",
   },
   {
+    icon: "file",
     title: "Pengadaan yang transparan",
     text: "Memberikan layanan cepat dan akurat dari penawaran, pengiriman, hingga penagihan, tanpa biaya yang tidak disepakati.",
   },
   {
+    icon: "handshake",
     title: "Hubungan jangka panjang",
     text: "Merespons cepat, menyelesaikan masalah sampai tuntas, dan tumbuh bersama pelanggan serta mitra pemasok.",
   },
@@ -266,3 +323,137 @@ export const contactCopy = {
 
 export const galleryNote =
   "Dari alat tulis harian sampai perlengkapan arsip dan kertas cetak, tersedia untuk pengiriman rutin.";
+
+export const marquee = [
+  "Alat Tulis Kantor, Satu Pintu",
+  "Katalog lengkap",
+  "Harga kompetitif",
+  "Antar terjadwal",
+  "Melayani dengan Lengkap, Cepat, dan Tepat",
+];
+export const faqs = [
+  {
+    q: "Produk apa saja yang disediakan PUB?",
+    a:
+      "Alat tulis, kertas & cetak, filing & arsip, serta perlengkapan meja. Juga tersedia: " +
+      alsoAvailable,
+  },
+  { q: "Siapa saja pelanggan PUB?", a: profile.paragraphs[0] },
+  {
+    q: "Bagaimana cara meminta penawaran?",
+    a: "Hubungi admin di " + site.contact.phone + ". " + contactCopy.body,
+  },
+  {
+    q: "Bagaimana pengiriman barang?",
+    a: strengths[2].text + " " + delivery.points[0] + " " + delivery.points[3],
+  },
+  {
+    q: "Apakah administrasi pembelian rapi?",
+    a: strengths[3].text + " " + profile.paragraphs[1],
+  },
+];
+export const ui = {
+  home: "Beranda",
+  about: "Tentang Kami",
+  contact: "Hubungi Kami",
+  products: "Produk & Layanan",
+  product: "Produk",
+  gallery: "Galeri",
+  commitment: "Komitmen & Jaminan Layanan",
+  heroChip: "Company Profile 2026",
+  heroStart: "Alat Tulis Kantor,",
+  heroEnd: "Satu Pintu.",
+  heroPoints: ["Katalog lengkap", "Harga kompetitif", "Antar terjadwal"],
+  viewProducts: "Lihat Produk",
+  more: "Selengkapnya",
+  collection: "Lihat koleksi",
+  allProducts: "Semua produk",
+  featured: "Produk pilihan",
+  viewAll: "Lihat semua produk",
+  price: "Hubungi kami untuk harga",
+  supplied: "Yang Kami Sediakan",
+  suppliedLead:
+    "Kelompok barang yang menutup hampir seluruh belanja ATK bulanan sebuah kantor.",
+  strengths: "Keunggulan",
+  also: "Juga tersedia",
+  faq: "Pertanyaan yang sering diajukan",
+  cta: "Butuh penawaran untuk pembelian partai besar?",
+  telephone: "Telepon kami",
+  whatsapp: "Chat WhatsApp",
+  availableSoon: "Segera tersedia",
+  phoneLabel: "Telepon admin",
+  whatsappLabel: "WhatsApp",
+  emailLabel: "Email",
+  addressLabel: "Alamat",
+  pages: "Halaman",
+  serving: "Melayani",
+  copyright: "© 2026",
+  profile: "Profil Perusahaan",
+  identity: "Identitas perusahaan",
+  vision: "Visi",
+  missions: "Misi: empat komitmen yang kami jalankan setiap hari",
+  structure: "Struktur Organisasi",
+  orgAlt:
+    "Bagan: Komisaris membawahi Direktur Utama, yang membawahi Finance, Operasional, dan GM.",
+  orgPlaceholder:
+    "[PLACEHOLDER: nama pejabat belum tersedia di company profile]",
+  galleryTitle: "Ragam Barang yang Kami Pasok",
+  galleryCatalog: "Katalog foto per kategori",
+  commitments: "Komitmen kami",
+  commitmentLead:
+    "PT Pangudi Utama Berjaya berkomitmen untuk selalu memberikan yang terbaik bagi seluruh pelanggan.",
+  mapTitle: "Peta lokasi PT Pangudi Utama Berjaya",
+  skip: "Lompat ke konten",
+  menu: "Buka menu",
+  close: "Tutup menu",
+  homeLabel: "beranda",
+  categoryNav: "Kategori produk",
+  sectionNav: "Bagian halaman",
+  mainNav: "Utama",
+  mobileNav: "Utama (ponsel)",
+  breadcrumb: "Breadcrumb",
+};
+
+export const galleryItems = [
+  {
+    src: "/images/gallery/alat-tulis.webp",
+    alt: "Pulpen, spidol, dan buku catatan di atas meja",
+    title: "Alat tulis & perlengkapan meja",
+    text: "Pulpen, pensil, spidol, stapler, gunting, lem, dan aksesori meja kerja untuk kebutuhan harian.",
+    w: 665,
+    h: 375,
+    big: true,
+  },
+  {
+    src: "/images/gallery/kertas-cetak.webp",
+    alt: "Kardus kertas HVS Copy Paper",
+    title: "Kertas & cetak",
+    text: "HVS A4/F4, continuous form.",
+    w: 289,
+    h: 175,
+  },
+  {
+    src: "/images/gallery/filing-arsip.webp",
+    alt: "Map filing berwarna-warni",
+    title: "Filing & arsip",
+    text: "Ordner, map, sekat, label.",
+    w: 276,
+    h: 175,
+  },
+  {
+    src: "/images/gallery/stapler-clips.webp",
+    alt: "Stapler, tape dispenser, penggaris, dan gunting",
+    title: "Stapler & clips",
+    text: "",
+    w: 289,
+    h: 172,
+  },
+  {
+    src: "/images/gallery/paket-set-kantor.webp",
+    alt: "Paket set kantor warna merah muda",
+    title: "Paket set kantor",
+    text: "",
+    w: 276,
+    h: 172,
+  },
+];

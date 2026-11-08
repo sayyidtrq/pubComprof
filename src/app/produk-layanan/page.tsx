@@ -1,70 +1,67 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Container, PageHeader } from "@/components/PageHeader";
-import { alsoAvailable, categories, strengths } from "@/content/site";
-
-export const metadata: Metadata = { title: "Produk & Layanan" };
-
+import { SectionHeading } from "@/components/SectionHeading";
+import { CategoryCard } from "@/components/CategoryCard";
+import { ProductCard } from "@/components/ProductCard";
+import { FeatureCard } from "@/components/FeatureCard";
+import { alsoAvailable, categories, strengths, ui } from "@/content/site";
+import { toneStyles } from "@/content/tones";
+export const metadata: Metadata = { title: ui.products };
 export default function ProdukPage() {
   return (
     <>
       <PageHeader
-        title="Yang Kami Sediakan"
-        lead="Kelompok barang yang menutup hampir seluruh belanja ATK bulanan sebuah kantor."
-        tone="yellow"
+        title={ui.supplied}
+        lead={ui.suppliedLead}
+        tone="teal"
+        crumbs={[{ label: ui.home, href: "/" }, { label: ui.products }]}
       />
-      {categories.map((c) => (
-        <section
-          key={c.slug}
-          className={`tone-${c.tone}`}
-          aria-labelledby={`k-${c.slug}`}
-        >
-          <Container className="grid items-center gap-8 py-12 sm:py-14 md:grid-cols-[0.9fr_1.1fr]">
-            <div className="relative aspect-[16/10] overflow-hidden md:order-2">
-              <Image
-                src={c.image}
-                alt={c.imageAlt}
-                fill
-                sizes="(min-width:768px) 55vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <h2 id={`k-${c.slug}`} className="display text-5xl sm:text-6xl">
-                {c.name}
-              </h2>
-              <p className="mt-4 text-lg">{c.items}</p>
+      <section className="section">
+        <Container className="space-y-6">
+          {categories.map((c) => (
+            <CategoryCard key={c.slug} category={c} wide />
+          ))}
+        </Container>
+      </section>
+      <section className="section bg-navy-50">
+        <Container>
+          <SectionHeading title={ui.allProducts} />
+          <nav
+            className="mb-8 flex flex-wrap gap-2"
+            aria-label={ui.categoryNav}
+          >
+            {categories.map((c) => (
               <Link
+                key={c.slug}
                 href={`/produk-layanan/${c.slug}`}
-                className="bg-navy hover:bg-navy-soft mt-6 inline-block px-5 py-3 font-bold text-white"
+                className={`chip text-navy min-h-11 ${toneStyles[c.tone].tint}`}
               >
-                Lihat katalog foto
+                {c.name}
               </Link>
-            </div>
-          </Container>
-        </section>
-      ))}
-
-      <section className="py-14 sm:py-20">
-        <Container className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
-          <div>
-            <h2 className="heading text-4xl">Keunggulan</h2>
-            <p className="text-navy-soft mt-4 text-lg">
-              Juga tersedia: {alsoAvailable.toLowerCase()}
-            </p>
-          </div>
-          <dl className="divide-rule border-rule divide-y border-y">
-            {strengths.map((s) => (
-              <div
-                key={s.title}
-                className="grid gap-1 py-5 sm:grid-cols-[12rem_1fr] sm:gap-6"
-              >
-                <dt className="label text-2xl">{s.title}</dt>
-                <dd className="text-navy-soft">{s.text}</dd>
-              </div>
             ))}
-          </dl>
+          </nav>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
+            {categories.flatMap((c) =>
+              c.catalog.map((p) => (
+                <ProductCard key={p.src} product={p} category={c} />
+              )),
+            )}
+          </div>
+        </Container>
+      </section>
+      <section className="section">
+        <Container>
+          <SectionHeading title={ui.strengths} />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {strengths.map((f) => (
+              <FeatureCard key={f.title} feature={f} />
+            ))}
+          </div>
+          <div className="card mt-8 p-6">
+            <h2 className="h-card">{ui.also}</h2>
+            <p className="text-muted mt-2">{alsoAvailable}</p>
+          </div>
         </Container>
       </section>
     </>

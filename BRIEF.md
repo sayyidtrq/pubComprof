@@ -1,7 +1,7 @@
 # Brief — Website Company Profile PT Pangudi Utama Berjaya (PUB)
 
 > Dokumen kerja. Bagian **Status** di bawah di-update setiap fase selesai.
-> Terakhir diperbarui: 2026-11-03
+> Terakhir diperbarui: 2026-11-08
 
 ---
 
@@ -17,6 +17,8 @@
 | 4   | Build halaman (mini loop)                          | ✅ Selesai       | 11 URL statis, lint/typecheck/build lolos, detector impeccable bersih         |
 | 5   | Review akhir (a11y, performa, impeccable critique) | 🟡 Sebagian      | Belum: review agent terpisah, Lighthouse, cek visual semua halaman di desktop |
 | 6   | Deploy ke Vercel                                   | 🟡 Menunggu push | Otomatis dari `main`                                                          |
+
+| 7 | Penyelarasan desain ke papan Canva | ✅ Selesai | Delapan fase, QA responsif dan aksesibilitas; branch `design/penyelarasan-canva`, tanpa merge ke main |
 
 Legenda: ✅ selesai · 🟡 berjalan/menunggu · ⏳ belum · ⛔ blocked
 

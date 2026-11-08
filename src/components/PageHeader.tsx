@@ -1,28 +1,33 @@
 import type { ReactNode } from "react";
-import type { Tone } from "@/content/site";
-
+import { type Tone, ui } from "@/content/site";
+import { toneStyles } from "@/content/tones";
+import { Breadcrumb, type Crumb } from "./Breadcrumb";
 export function PageHeader({
   title,
   lead,
-  tone = "teal",
+  tone = "lavender",
   children,
+  crumbs,
 }: {
   title: string;
   lead?: string;
   tone?: Tone;
   children?: ReactNode;
+  crumbs?: Crumb[];
 }) {
   return (
-    <section className={`tone-${tone}`}>
-      <div className="mx-auto max-w-7xl px-4 pt-14 pb-12 sm:px-6 sm:pt-20 sm:pb-16 lg:px-8">
-        <h1 className="display text-[clamp(2.75rem,8vw,6rem)]">{title}</h1>
-        {lead && <p className="measure mt-5 text-lg sm:text-xl">{lead}</p>}
+    <section className={toneStyles[tone].tint}>
+      <Container className="py-10 sm:py-14">
+        <Breadcrumb
+          items={crumbs || [{ label: ui.home, href: "/" }, { label: title }]}
+        />
+        <h1 className="h-page">{title}</h1>
+        {lead && <p className="measure text-muted mt-5 text-lg">{lead}</p>}
         {children}
-      </div>
+      </Container>
     </section>
   );
 }
-
 export function Container({
   children,
   className = "",
@@ -31,7 +36,9 @@ export function Container({
   className?: string;
 }) {
   return (
-    <div className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${className}`}>
+    <div
+      className={`mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 ${className}`}
+    >
       {children}
     </div>
   );
