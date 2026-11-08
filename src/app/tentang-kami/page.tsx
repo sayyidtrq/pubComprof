@@ -1,49 +1,47 @@
 import type { Metadata } from "next";
+import { Building2, Briefcase, Landmark, MapPin, Phone } from "lucide-react";
 import { Container, PageHeader } from "@/components/PageHeader";
-import { missions, orgChart, profile, vision } from "@/content/site";
-
-export const metadata: Metadata = { title: "Tentang Kami" };
-
+import { FeatureCard } from "@/components/FeatureCard";
+import {
+  missions,
+  orgChart,
+  profile,
+  vision,
+  nav,
+  ui,
+  site,
+} from "@/content/site";
+export const metadata: Metadata = { title: ui.about };
 const box =
-  "border-2 border-navy bg-white px-6 py-3 text-center font-heading text-xl";
-
-const sections = [
-  { id: "profil", label: "Profil Perusahaan" },
-  { id: "visi-misi", label: "Visi & Misi" },
-  { id: "struktur-organisasi", label: "Struktur Organisasi" },
-];
-
+  "rounded-btn border-2 border-navy bg-white px-2 py-3 text-center font-heading text-sm font-semibold sm:px-6 sm:text-xl";
+const identityIcons = [Building2, Briefcase, Landmark, MapPin, Phone];
 export default function TentangKamiPage() {
   return (
     <>
-      <PageHeader title="Tentang Kami" lead={profile.lead} tone="teal">
-        <nav aria-label="Bagian halaman" className="mt-8">
-          <ul className="flex flex-wrap gap-2">
-            {sections.map((s) => (
-              <li key={s.id}>
-                <a
-                  href={`#${s.id}`}
-                  className="bg-navy hover:bg-navy-900 block px-4 py-2 text-sm font-bold text-white"
-                >
-                  {s.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+      <PageHeader title={ui.about} lead={profile.lead}>
+        <nav aria-label={ui.sectionNav} className="mt-7 flex flex-wrap gap-2">
+          {nav[1].children.map((s) => (
+            <a
+              key={s.href}
+              href={s.href}
+              className="chip hover:bg-navy min-h-11 bg-white hover:text-white"
+            >
+              {s.label}
+            </a>
+          ))}
         </nav>
       </PageHeader>
-
       <section
         id="profil"
+        className="section scroll-mt-24"
         aria-labelledby="h-profil"
-        className="scroll-mt-16 py-14 sm:py-20"
       >
-        <Container className="grid gap-12 lg:grid-cols-[1.2fr_1fr]">
+        <Container className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
           <div>
-            <h2 id="h-profil" className="h-section text-4xl sm:text-5xl">
-              Profil Perusahaan
+            <h2 id="h-profil" className="h-section">
+              {ui.profile}
             </h2>
-            <div className="mt-6 space-y-6 text-lg">
+            <div className="text-muted mt-6 space-y-5 text-lg">
               {profile.paragraphs.map((p) => (
                 <p key={p} className="measure">
                   {p}
@@ -52,85 +50,83 @@ export default function TentangKamiPage() {
             </div>
           </div>
           <aside
+            className="card self-start p-6 sm:p-8"
             aria-labelledby="identitas"
-            className="border-yellow self-start border-t-8 bg-white p-6"
           >
-            <h3 id="identitas" className="font-heading text-2xl">
-              Identitas perusahaan
+            <h3 id="identitas" className="h-card">
+              {ui.identity}
             </h3>
-            <dl className="divide-line mt-4 divide-y">
-              {profile.identity.map(([k, v]) => (
-                <div
-                  key={k}
-                  className="grid grid-cols-[7rem_1fr] gap-3 py-3 text-sm"
-                >
-                  <dt className="text-muted">{k}</dt>
-                  <dd className="font-semibold">{v}</dd>
-                </div>
-              ))}
+            <dl className="divide-line mt-5 divide-y">
+              {profile.identity.map(([k, v], i) => {
+                const Icon = identityIcons[i];
+                return (
+                  <div key={k} className="py-4">
+                    <dt className="text-muted flex items-center gap-2 text-sm">
+                      <Icon size={18} aria-hidden="true" />
+                      {k}
+                    </dt>
+                    <dd className="mt-1 font-medium">
+                      {k === ui.phoneLabel.replace(" admin", "") ? (
+                        <a href={site.contact.phoneHref}>{v}</a>
+                      ) : (
+                        v
+                      )}
+                    </dd>
+                  </div>
+                );
+              })}
             </dl>
+            <p className="text-muted mt-5 text-sm">{site.since}</p>
           </aside>
         </Container>
       </section>
-
-      <section id="visi-misi" aria-labelledby="h-visi" className="scroll-mt-16">
-        <div className="bg-navy text-white">
-          <Container className="py-14 sm:py-20">
-            <h2 id="h-visi" className="font-heading text-yellow text-2xl">
-              Visi
+      <section id="visi-misi" className="scroll-mt-24" aria-labelledby="h-visi">
+        <Container>
+          <div className="rounded-card bg-navy p-6 text-white sm:p-10 lg:p-12">
+            <h2 id="h-visi" className="h-section">
+              {ui.vision}
             </h2>
-            <p className="h-page mt-4 max-w-5xl text-[clamp(2rem,5vw,4rem)] !leading-[1.05] !font-bold">
+            <p className="measure font-heading mt-5 text-xl leading-relaxed sm:text-2xl">
               {vision.text}
             </p>
-            <p className="mt-10 max-w-xl border-t border-white/25 pt-5 text-lg text-white/80 italic">
+            <blockquote className="measure border-yellow mt-8 border-l-2 pl-5 text-lg italic">
               {vision.quote}
-            </p>
-          </Container>
-        </div>
-        <Container className="py-14 sm:py-20">
-          <h3 className="h-section text-4xl sm:text-5xl">
-            Misi: empat komitmen yang kami jalankan setiap hari
-          </h3>
-          <ol className="bg-line mt-10 grid gap-px sm:grid-cols-2">
-            {missions.map((m, i) => (
-              <li
-                key={m.title}
-                className={`p-6 sm:p-8 ${["text-navy bg-teal-50", "text-navy bg-yellow-50", "bg-lavender-50 text-navy", "bg-navy text-white"][i]}`}
-              >
-                <p
-                  className="font-heading text-5xl leading-none opacity-70"
-                  aria-hidden="true"
-                >
-                  {i + 1}
-                </p>
-                <h4 className="h-section mt-4 text-2xl">{m.title}</h4>
-                <p className="mt-2">{m.text}</p>
-              </li>
-            ))}
-          </ol>
+            </blockquote>
+          </div>
+          <div className="section">
+            <h2 className="h-section">{ui.missions}</h2>
+            <ol className="mt-8 grid gap-5 sm:grid-cols-2">
+              {missions.map((m, i) => (
+                <li key={m.title}>
+                  <FeatureCard feature={m} number={i + 1} />
+                </li>
+              ))}
+            </ol>
+          </div>
         </Container>
       </section>
-
       <section
         id="struktur-organisasi"
+        className="section bg-lavender-50 scroll-mt-24"
         aria-labelledby="h-struktur"
-        className="bg-lavender-50 text-navy scroll-mt-16 py-14 sm:py-20"
       >
         <Container>
-          <h2 id="h-struktur" className="h-page text-5xl sm:text-6xl">
-            Struktur Organisasi
+          <h2 id="h-struktur" className="h-section">
+            {ui.structure}
           </h2>
-          <figure className="mt-10">
+          <figure className="card mt-8 p-4 py-8 sm:p-10">
             <div
               className="mx-auto flex max-w-3xl flex-col items-center"
               role="img"
-              aria-label="Bagan: Komisaris membawahi Direktur Utama, yang membawahi Finance, Operasional, dan GM."
+              aria-label={ui.orgAlt}
             >
-              <div className={box}>{orgChart.top}</div>
+              <div className="rounded-btn bg-navy font-heading px-6 py-3 text-center font-semibold text-white sm:text-xl">
+                {orgChart.top}
+              </div>
               <span className="bg-navy h-8 w-0.5" aria-hidden="true" />
               <div className={box}>{orgChart.second}</div>
               <span className="bg-navy h-8 w-0.5" aria-hidden="true" />
-              <div className="relative grid w-full grid-cols-3 gap-3 pt-8 sm:gap-6">
+              <div className="relative grid w-full grid-cols-3 gap-2 pt-8 sm:gap-6">
                 <span
                   className="bg-navy absolute top-0 right-[16.6%] left-[16.6%] h-0.5"
                   aria-hidden="true"
@@ -141,15 +137,13 @@ export default function TentangKamiPage() {
                       className="bg-navy absolute -top-8 left-1/2 h-8 w-0.5"
                       aria-hidden="true"
                     />
-                    <div className={`${box} !px-2 !text-base sm:!text-xl`}>
-                      {t}
-                    </div>
+                    <div className={box}>{t}</div>
                   </div>
                 ))}
               </div>
             </div>
-            <figcaption className="mx-auto mt-10 max-w-3xl text-center text-sm">
-              [PLACEHOLDER: nama pejabat belum tersedia di company profile]
+            <figcaption className="text-muted mx-auto mt-8 max-w-3xl text-center text-sm">
+              {ui.orgPlaceholder}
             </figcaption>
           </figure>
         </Container>
