@@ -55,7 +55,7 @@ export default function GaleriPage() {
       <PageHeader
         title="Ragam Barang yang Kami Pasok"
         lead={galleryNote}
-        tone="blue"
+        tone="navy"
       />
       <section className="py-12 sm:py-16">
         <Container className="grid gap-4 md:grid-cols-4">
@@ -77,9 +77,9 @@ export default function GaleriPage() {
                 className="h-auto w-full"
               />
               <figcaption className="p-4">
-                <span className="label text-xl">{it.title}</span>
+                <span className="font-heading text-xl">{it.title}</span>
                 {it.text && (
-                  <span className="text-navy-soft mt-1 block text-sm">
+                  <span className="text-muted mt-1 block text-sm">
                     {it.text}
                   </span>
                 )}
@@ -88,13 +88,13 @@ export default function GaleriPage() {
           ))}
         </Container>
         <Container className="mt-14">
-          <h2 className="heading text-3xl">Katalog foto per kategori</h2>
+          <h2 className="h-section text-3xl">Katalog foto per kategori</h2>
           <ul className="mt-6 flex flex-wrap gap-3">
             {categories.map((c) => (
               <li key={c.slug}>
                 <a
                   href={`/produk-layanan/${c.slug}`}
-                  className={`tone-${c.tone} block px-5 py-3 font-bold hover:brightness-95`}
+                  className={`${{ teal: "text-navy bg-teal-50", navy: "bg-navy-50 text-navy", lavender: "bg-lavender-50 text-navy", yellow: "text-navy bg-yellow-50" }[c.tone]} block px-5 py-3 font-bold hover:brightness-95`}
                 >
                   {c.name}
                 </a>

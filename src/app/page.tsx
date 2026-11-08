@@ -9,8 +9,10 @@ export default function Home() {
       <section className="bg-navy text-white">
         <Container className="grid items-center gap-12 py-14 sm:py-20 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:py-24">
           <div>
-            <p className="label text-lg text-white/70">Company Profile 2026</p>
-            <h1 className="display mt-3 text-[clamp(3.5rem,10vw,7.5rem)]">
+            <p className="font-heading text-lg text-white/70">
+              Company Profile 2026
+            </p>
+            <h1 className="h-page mt-3 text-[clamp(3.5rem,10vw,7.5rem)]">
               Alat Tulis Kantor,{" "}
               <span className="text-yellow">Satu Pintu.</span>
             </h1>
@@ -43,14 +45,14 @@ export default function Home() {
               <li
                 key={c.slug}
                 style={{ ["--i" as string]: i }}
-                className={`strip-in ${i % 2 ? "lg:ml-10" : "lg:mr-10"}`}
+                className={`${i % 2 ? "lg:ml-10" : "lg:mr-10"}`}
               >
                 <Link
                   href={`/produk-layanan/${c.slug}`}
-                  className={`tone-${c.tone} group flex items-stretch justify-between overflow-hidden transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-x-2`}
+                  className={`${{ teal: "text-navy bg-teal-50", navy: "bg-navy-50 text-navy", lavender: "bg-lavender-50 text-navy", yellow: "text-navy bg-yellow-50" }[c.tone]} group flex items-stretch justify-between overflow-hidden transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-x-2`}
                 >
                   <span className="flex flex-col justify-center px-5 py-4">
-                    <span className="label text-3xl leading-none sm:text-4xl">
+                    <span className="font-heading text-3xl leading-none sm:text-4xl">
                       {c.name}
                     </span>
                     <span className="mt-1 text-sm">{c.items}</span>
@@ -75,10 +77,10 @@ export default function Home() {
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
             <div>
-              <h2 className="heading text-4xl sm:text-5xl">
+              <h2 className="h-section text-4xl sm:text-5xl">
                 Satu permintaan. Satu faktur. Satu jadwal pengiriman.
               </h2>
-              <p className="measure text-navy-soft mt-5 text-lg">
+              <p className="measure text-muted mt-5 text-lg">
                 Pelanggan tidak perlu lagi berbelanja ke banyak toko atau
                 mengumpulkan penawaran dari belasan pemasok.
               </p>
@@ -89,14 +91,14 @@ export default function Home() {
                 Baca profil perusahaan
               </Link>
             </div>
-            <dl className="divide-rule border-rule divide-y border-y">
+            <dl className="divide-line border-line divide-y border-y">
               {strengths.map((s) => (
                 <div
                   key={s.title}
                   className="grid gap-1 py-5 sm:grid-cols-[12rem_1fr] sm:gap-6"
                 >
-                  <dt className="label text-2xl">{s.title}</dt>
-                  <dd className="text-navy-soft">{s.text}</dd>
+                  <dt className="font-heading text-2xl">{s.title}</dt>
+                  <dd className="text-muted">{s.text}</dd>
                 </div>
               ))}
             </dl>
@@ -105,20 +107,23 @@ export default function Home() {
       </section>
 
       {categories.map((c) => (
-        <section key={c.slug} className={`tone-${c.tone}`}>
+        <section
+          key={c.slug}
+          className={`${{ teal: "text-navy bg-teal-50", navy: "bg-navy-50 text-navy", lavender: "bg-lavender-50 text-navy", yellow: "text-navy bg-yellow-50" }[c.tone]}`}
+        >
           <Container className="grid items-center gap-8 py-12 sm:py-16 md:grid-cols-[1fr_1.2fr]">
             <div>
               <p
-                className="label text-6xl leading-none opacity-60 sm:text-7xl"
+                className="font-heading text-6xl leading-none opacity-60 sm:text-7xl"
                 aria-hidden="true"
               >
                 {c.code}
               </p>
-              <h2 className="display mt-2 text-5xl sm:text-6xl">{c.name}</h2>
+              <h2 className="h-page mt-2 text-5xl sm:text-6xl">{c.name}</h2>
               <p className="measure mt-4 text-lg">{c.items}</p>
               <Link
                 href={`/produk-layanan/${c.slug}`}
-                className="bg-navy hover:bg-navy-soft mt-6 inline-block px-5 py-3 font-bold text-white"
+                className="bg-navy hover:bg-navy-900 mt-6 inline-block px-5 py-3 font-bold text-white"
               >
                 Lihat {c.name.toLowerCase()}
               </Link>
@@ -139,14 +144,12 @@ export default function Home() {
       <section className="py-16 sm:py-20">
         <Container className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <h2 className="heading text-3xl sm:text-4xl">Juga tersedia</h2>
-            <p className="measure text-navy-soft mt-2 text-lg">
-              {alsoAvailable}
-            </p>
+            <h2 className="h-section text-3xl sm:text-4xl">Juga tersedia</h2>
+            <p className="measure text-muted mt-2 text-lg">{alsoAvailable}</p>
           </div>
           <a
             href={site.contact.phoneHref}
-            className="bg-navy hover:bg-navy-soft px-6 py-4 text-center text-lg font-bold text-white"
+            className="bg-navy hover:bg-navy-900 px-6 py-4 text-center text-lg font-bold text-white"
           >
             Minta penawaran: {site.contact.phone}
           </a>

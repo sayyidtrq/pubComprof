@@ -17,7 +17,7 @@ export default function ProdukPage() {
       {categories.map((c) => (
         <section
           key={c.slug}
-          className={`tone-${c.tone}`}
+          className={`${{ teal: "text-navy bg-teal-50", navy: "bg-navy-50 text-navy", lavender: "bg-lavender-50 text-navy", yellow: "text-navy bg-yellow-50" }[c.tone]}`}
           aria-labelledby={`k-${c.slug}`}
         >
           <Container className="grid items-center gap-8 py-12 sm:py-14 md:grid-cols-[0.9fr_1.1fr]">
@@ -31,13 +31,13 @@ export default function ProdukPage() {
               />
             </div>
             <div>
-              <h2 id={`k-${c.slug}`} className="display text-5xl sm:text-6xl">
+              <h2 id={`k-${c.slug}`} className="h-page text-5xl sm:text-6xl">
                 {c.name}
               </h2>
               <p className="mt-4 text-lg">{c.items}</p>
               <Link
                 href={`/produk-layanan/${c.slug}`}
-                className="bg-navy hover:bg-navy-soft mt-6 inline-block px-5 py-3 font-bold text-white"
+                className="bg-navy hover:bg-navy-900 mt-6 inline-block px-5 py-3 font-bold text-white"
               >
                 Lihat katalog foto
               </Link>
@@ -49,19 +49,19 @@ export default function ProdukPage() {
       <section className="py-14 sm:py-20">
         <Container className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
           <div>
-            <h2 className="heading text-4xl">Keunggulan</h2>
-            <p className="text-navy-soft mt-4 text-lg">
+            <h2 className="h-section text-4xl">Keunggulan</h2>
+            <p className="text-muted mt-4 text-lg">
               Juga tersedia: {alsoAvailable.toLowerCase()}
             </p>
           </div>
-          <dl className="divide-rule border-rule divide-y border-y">
+          <dl className="divide-line border-line divide-y border-y">
             {strengths.map((s) => (
               <div
                 key={s.title}
                 className="grid gap-1 py-5 sm:grid-cols-[12rem_1fr] sm:gap-6"
               >
-                <dt className="label text-2xl">{s.title}</dt>
-                <dd className="text-navy-soft">{s.text}</dd>
+                <dt className="font-heading text-2xl">{s.title}</dt>
+                <dd className="text-muted">{s.text}</dd>
               </div>
             ))}
           </dl>

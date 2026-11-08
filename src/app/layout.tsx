@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Archivo, Hanken_Grotesk } from "next/font/google";
+import { Poppins, Hanken_Grotesk } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const archivo = Archivo({
+const poppins = Poppins({
   subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-archivo",
+  weight: ["500", "600", "700"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="id"
-      className={`${archivo.variable} ${hanken.variable} h-full antialiased`}
+      className={`${poppins.variable} ${hanken.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <a

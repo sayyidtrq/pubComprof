@@ -44,7 +44,7 @@ export default async function KategoriPage({
                 key={x.slug}
                 href={`/produk-layanan/${x.slug}`}
                 aria-current={x.slug === c.slug ? "page" : undefined}
-                className={`tone-${x.tone} px-4 py-2 text-sm font-bold ${x.slug === c.slug ? "ring-navy ring-offset-paper ring-2 ring-offset-2" : "opacity-70 hover:opacity-100"}`}
+                className={`${{ teal: "text-navy bg-teal-50", navy: "bg-navy-50 text-navy", lavender: "bg-lavender-50 text-navy", yellow: "text-navy bg-yellow-50" }[x.tone]} px-4 py-2 text-sm font-bold ${x.slug === c.slug ? "ring-navy ring-offset-surface ring-2 ring-offset-2" : "opacity-70 hover:opacity-100"}`}
               >
                 {x.name}
               </Link>
@@ -73,7 +73,7 @@ export default async function KategoriPage({
               </li>
             ))}
           </ul>
-          <p className="text-navy-soft mt-10 max-w-2xl">
+          <p className="text-muted mt-10 max-w-2xl">
             Foto produk diambil dari company profile. Untuk ketersediaan,
             spesifikasi, dan penawaran harga, hubungi admin di{" "}
             <a

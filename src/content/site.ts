@@ -42,7 +42,7 @@ export const nav = [
   { label: "Kontak", href: "/kontak" },
 ] as const;
 
-export type Tone = "teal" | "blue" | "lavender" | "yellow";
+export type Tone = "teal" | "navy" | "lavender" | "yellow";
 
 export type Category = {
   slug: string;
@@ -111,7 +111,7 @@ export const categories: Category[] = [
     slug: "kertas-cetak",
     code: "K",
     name: "Kertas & cetak",
-    tone: "blue",
+    tone: "navy",
     items: "HVS A4/F4, continuous form, kertas thermal, nota.",
     image: "/images/gallery/kertas-cetak.webp",
     imageAlt: "Tumpukan kardus kertas HVS Copy Paper",

@@ -50,9 +50,9 @@ export function Nav() {
             width={502}
             height={413}
             className="h-10 w-auto rounded-sm bg-white p-0.5"
-            priority
+            preload
           />
-          <span className="label hidden text-lg leading-none sm:block">
+          <span className="font-heading hidden text-lg leading-none sm:block">
             {site.shortName}
             <span className="block text-[0.7rem] font-semibold tracking-[0.08em] text-white/70">
               {site.name}
@@ -91,7 +91,7 @@ export function Nav() {
                   {aboutOpen && (
                     <ul
                       id="menu-tentang"
-                      className="bg-paper text-navy border-yellow absolute top-full left-0 min-w-64 border-t-4 py-2 shadow-[0_12px_28px_-8px_rgba(14,27,51,0.45)]"
+                      className="bg-surface text-navy border-yellow absolute top-full left-0 min-w-64 border-t-4 py-2 shadow-[0_12px_28px_-8px_rgba(14,27,51,0.45)]"
                     >
                       {item.children.map((c) => (
                         <li key={c.href}>

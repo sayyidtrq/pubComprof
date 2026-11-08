@@ -4,7 +4,8 @@ import { missions, orgChart, profile, vision } from "@/content/site";
 
 export const metadata: Metadata = { title: "Tentang Kami" };
 
-const box = "border-2 border-navy bg-white px-6 py-3 text-center label text-xl";
+const box =
+  "border-2 border-navy bg-white px-6 py-3 text-center font-heading text-xl";
 
 const sections = [
   { id: "profil", label: "Profil Perusahaan" },
@@ -22,7 +23,7 @@ export default function TentangKamiPage() {
               <li key={s.id}>
                 <a
                   href={`#${s.id}`}
-                  className="bg-navy hover:bg-navy-soft block px-4 py-2 text-sm font-bold text-white"
+                  className="bg-navy hover:bg-navy-900 block px-4 py-2 text-sm font-bold text-white"
                 >
                   {s.label}
                 </a>
@@ -39,7 +40,7 @@ export default function TentangKamiPage() {
       >
         <Container className="grid gap-12 lg:grid-cols-[1.2fr_1fr]">
           <div>
-            <h2 id="h-profil" className="heading text-4xl sm:text-5xl">
+            <h2 id="h-profil" className="h-section text-4xl sm:text-5xl">
               Profil Perusahaan
             </h2>
             <div className="mt-6 space-y-6 text-lg">
@@ -54,16 +55,16 @@ export default function TentangKamiPage() {
             aria-labelledby="identitas"
             className="border-yellow self-start border-t-8 bg-white p-6"
           >
-            <h3 id="identitas" className="label text-2xl">
+            <h3 id="identitas" className="font-heading text-2xl">
               Identitas perusahaan
             </h3>
-            <dl className="divide-rule mt-4 divide-y">
+            <dl className="divide-line mt-4 divide-y">
               {profile.identity.map(([k, v]) => (
                 <div
                   key={k}
                   className="grid grid-cols-[7rem_1fr] gap-3 py-3 text-sm"
                 >
-                  <dt className="text-navy-soft">{k}</dt>
+                  <dt className="text-muted">{k}</dt>
                   <dd className="font-semibold">{v}</dd>
                 </div>
               ))}
@@ -75,10 +76,10 @@ export default function TentangKamiPage() {
       <section id="visi-misi" aria-labelledby="h-visi" className="scroll-mt-16">
         <div className="bg-navy text-white">
           <Container className="py-14 sm:py-20">
-            <h2 id="h-visi" className="label text-yellow text-2xl">
+            <h2 id="h-visi" className="font-heading text-yellow text-2xl">
               Visi
             </h2>
-            <p className="display mt-4 max-w-5xl text-[clamp(2rem,5vw,4rem)] !leading-[1.05] !font-bold">
+            <p className="h-page mt-4 max-w-5xl text-[clamp(2rem,5vw,4rem)] !leading-[1.05] !font-bold">
               {vision.text}
             </p>
             <p className="mt-10 max-w-xl border-t border-white/25 pt-5 text-lg text-white/80 italic">
@@ -87,22 +88,22 @@ export default function TentangKamiPage() {
           </Container>
         </div>
         <Container className="py-14 sm:py-20">
-          <h3 className="heading text-4xl sm:text-5xl">
+          <h3 className="h-section text-4xl sm:text-5xl">
             Misi: empat komitmen yang kami jalankan setiap hari
           </h3>
-          <ol className="bg-rule mt-10 grid gap-px sm:grid-cols-2">
+          <ol className="bg-line mt-10 grid gap-px sm:grid-cols-2">
             {missions.map((m, i) => (
               <li
                 key={m.title}
-                className={`p-6 sm:p-8 ${["tone-teal", "tone-yellow", "tone-lavender", "tone-blue"][i]}`}
+                className={`p-6 sm:p-8 ${["text-navy bg-teal-50", "text-navy bg-yellow-50", "bg-lavender-50 text-navy", "bg-navy text-white"][i]}`}
               >
                 <p
-                  className="label text-5xl leading-none opacity-70"
+                  className="font-heading text-5xl leading-none opacity-70"
                   aria-hidden="true"
                 >
                   {i + 1}
                 </p>
-                <h4 className="heading mt-4 text-2xl">{m.title}</h4>
+                <h4 className="h-section mt-4 text-2xl">{m.title}</h4>
                 <p className="mt-2">{m.text}</p>
               </li>
             ))}
@@ -113,10 +114,10 @@ export default function TentangKamiPage() {
       <section
         id="struktur-organisasi"
         aria-labelledby="h-struktur"
-        className="tone-lavender scroll-mt-16 py-14 sm:py-20"
+        className="bg-lavender-50 text-navy scroll-mt-16 py-14 sm:py-20"
       >
         <Container>
-          <h2 id="h-struktur" className="display text-5xl sm:text-6xl">
+          <h2 id="h-struktur" className="h-page text-5xl sm:text-6xl">
             Struktur Organisasi
           </h2>
           <figure className="mt-10">

@@ -13,6 +13,7 @@
     "check": "pnpm lint && pnpm typecheck && pnpm format:check"
   },
   "dependencies": {
+    "lucide-react": "^1.70.0",
     "next": "16.4.4",
     "react": "19.3.0",
     "react-dom": "19.3.0"

@@ -12,28 +12,30 @@ export default function KontakPage() {
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
           <div>
             <p className="measure text-lg">{contactCopy.body}</p>
-            <dl className="divide-rule border-rule mt-8 divide-y border-y">
+            <dl className="divide-line border-line mt-8 divide-y border-y">
               <div className="py-4">
-                <dt className="label text-navy-soft text-sm">Telepon admin</dt>
+                <dt className="font-heading text-muted text-sm">
+                  Telepon admin
+                </dt>
                 <dd>
                   <a
                     href={site.contact.phoneHref}
-                    className="label decoration-yellow text-4xl underline decoration-4"
+                    className="font-heading decoration-yellow text-4xl underline decoration-4"
                   >
                     {site.contact.phone}
                   </a>
                 </dd>
               </div>
               <div className="py-4">
-                <dt className="label text-navy-soft text-sm">WhatsApp</dt>
+                <dt className="font-heading text-muted text-sm">WhatsApp</dt>
                 <dd>{site.contact.whatsapp}</dd>
               </div>
               <div className="py-4">
-                <dt className="label text-navy-soft text-sm">Email</dt>
+                <dt className="font-heading text-muted text-sm">Email</dt>
                 <dd>{site.contact.email}</dd>
               </div>
               <div className="py-4">
-                <dt className="label text-navy-soft text-sm">Alamat</dt>
+                <dt className="font-heading text-muted text-sm">Alamat</dt>
                 <dd>
                   <address className="not-italic">
                     {site.contact.address}
@@ -41,7 +43,7 @@ export default function KontakPage() {
                 </dd>
               </div>
             </dl>
-            <p className="label mt-8 text-2xl">{site.closing}</p>
+            <p className="font-heading mt-8 text-2xl">{site.closing}</p>
           </div>
           <div className="min-h-96 bg-white">
             <iframe

@@ -15,12 +15,12 @@ export default function KomitmenPage() {
       <section className="py-14 sm:py-20">
         <Container className="grid gap-12 lg:grid-cols-2">
           <div>
-            <h2 className="heading text-4xl">Komitmen kami</h2>
-            <ol className="divide-rule border-rule mt-6 divide-y border-y">
+            <h2 className="h-section text-4xl">Komitmen kami</h2>
+            <ol className="divide-line border-line mt-6 divide-y border-y">
               {commitments.map((c, i) => (
                 <li key={c} className="grid grid-cols-[2.5rem_1fr] gap-3 py-4">
                   <span
-                    className="label text-teal-deep text-3xl leading-none"
+                    className="font-heading text-3xl leading-none text-teal-700"
                     aria-hidden="true"
                   >
                     {i + 1}
@@ -30,8 +30,8 @@ export default function KomitmenPage() {
               ))}
             </ol>
           </div>
-          <div className="tone-blue self-start p-8 sm:p-10">
-            <h2 className="heading text-4xl">{delivery.title}</h2>
+          <div className="bg-navy self-start p-8 text-white sm:p-10">
+            <h2 className="h-section text-4xl">{delivery.title}</h2>
             <p className="mt-4 text-lg">{delivery.lead}</p>
             <ol className="mt-5 list-decimal space-y-2 pl-6">
               {delivery.points.map((p) => (
