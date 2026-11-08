@@ -1,53 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Container, PageHeader } from "@/components/PageHeader";
-import { categories, galleryNote } from "@/content/site";
+import { categories, galleryNote, galleryItems } from "@/content/site";
 
 export const metadata: Metadata = { title: "Galeri" };
-
-const items = [
-  {
-    src: "/images/gallery/alat-tulis.webp",
-    alt: "Pulpen, spidol, dan buku catatan di atas meja",
-    title: "Alat tulis & perlengkapan meja",
-    text: "Pulpen, pensil, spidol, stapler, gunting, lem, dan aksesori meja kerja untuk kebutuhan harian.",
-    w: 665,
-    h: 375,
-    big: true,
-  },
-  {
-    src: "/images/gallery/kertas-cetak.webp",
-    alt: "Kardus kertas HVS Copy Paper",
-    title: "Kertas & cetak",
-    text: "HVS A4/F4, continuous form.",
-    w: 289,
-    h: 175,
-  },
-  {
-    src: "/images/gallery/filing-arsip.webp",
-    alt: "Map filing berwarna-warni",
-    title: "Filing & arsip",
-    text: "Ordner, map, sekat, label.",
-    w: 276,
-    h: 175,
-  },
-  {
-    src: "/images/gallery/stapler-clips.webp",
-    alt: "Stapler, tape dispenser, penggaris, dan gunting",
-    title: "Stapler & clips",
-    text: "",
-    w: 289,
-    h: 172,
-  },
-  {
-    src: "/images/gallery/paket-set-kantor.webp",
-    alt: "Paket set kantor warna merah muda",
-    title: "Paket set kantor",
-    text: "",
-    w: 276,
-    h: 172,
-  },
-];
 
 export default function GaleriPage() {
   return (
@@ -59,7 +15,7 @@ export default function GaleriPage() {
       />
       <section className="py-12 sm:py-16">
         <Container className="grid gap-4 md:grid-cols-4">
-          {items.map((it) => (
+          {galleryItems.map((it) => (
             <figure
               key={it.src}
               className={`bg-white ${it.big ? "md:col-span-2 md:row-span-2" : ""}`}
