@@ -9,6 +9,10 @@ import { nav, site, ui } from "@/content/site";
 
 export function Nav() {
   const pathname = usePathname();
+  const isHome = pathname === "/";
+  const desktopNav = isHome ? nav.slice(0, 4) : nav;
+  const desktopItemClass = isHome ? "hover:bg-white/10" : "hover:bg-surface";
+  const desktopActiveClass = isHome ? "text-yellow" : "bg-lavender-50";
   // A menu counts as open only on the page it was opened from, so navigating closes it.
   const [mobileFor, setMobileFor] = useState<string | null>(null);
   const [aboutFor, setAboutFor] = useState<string | null>(null);
@@ -47,26 +51,30 @@ export function Nav() {
       : pathname.startsWith(href.split("/").slice(0, 2).join("/"));
   return (
     <>
-      <div className="bg-navy hidden text-sm text-white md:block">
-        <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-2 lg:px-8">
-          <a
-            className="inline-flex items-center gap-2"
-            tabIndex={-1}
-            href={site.contact.phoneHref}
-          >
-            <Phone size={15} aria-hidden="true" />
-            {site.contact.phone}
-          </a>
-          <span className="inline-flex items-center gap-2">
-            <MapPin size={15} aria-hidden="true" />
-            {site.contact.addressShort}
-          </span>
-          <span className="ml-auto">
-            {ui.serving} {site.area}
-          </span>
+      {!isHome && (
+        <div className="bg-navy hidden text-sm text-white md:block">
+          <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-2 lg:px-8">
+            <a
+              className="inline-flex items-center gap-2"
+              tabIndex={-1}
+              href={site.contact.phoneHref}
+            >
+              <Phone size={15} aria-hidden="true" />
+              {site.contact.phone}
+            </a>
+            <span className="inline-flex items-center gap-2">
+              <MapPin size={15} aria-hidden="true" />
+              {site.contact.addressShort}
+            </span>
+            <span className="ml-auto">
+              {ui.serving} {site.area}
+            </span>
+          </div>
         </div>
-      </div>
-      <header className="border-line text-navy sticky top-0 z-40 border-b bg-white">
+      )}
+      <header
+        className={`sticky top-0 z-40 ${isHome ? "bg-home-dark text-white" : "border-line text-navy border-b bg-white"}`}
+      >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <Link
             href="/"
@@ -78,19 +86,30 @@ export function Nav() {
               alt=""
               width={502}
               height={413}
-              className="h-12 w-auto"
+              className={
+                isHome ? "h-12 w-auto rounded-md bg-white p-1" : "h-12 w-auto"
+              }
               preload
             />
-            <span className="font-heading text-xl font-bold lg:hidden xl:block">
-              {site.shortName}
-              <span className="block max-w-36 text-[10px] leading-tight font-medium">
+            {isHome ? (
+              <span className="font-heading max-w-44 text-xs leading-tight font-bold uppercase xl:max-w-56">
+                <span className="block text-[9px] font-medium italic">
+                  {ui.companyProfile}
+                </span>
                 {site.name}
               </span>
-            </span>
+            ) : (
+              <span className="font-heading text-xl font-bold lg:hidden xl:block">
+                {site.shortName}
+                <span className="block max-w-36 text-[10px] leading-tight font-medium">
+                  {site.name}
+                </span>
+              </span>
+            )}
           </Link>
           <nav aria-label={ui.mainNav} className="hidden lg:block">
             <ul className="flex items-center gap-0.5">
-              {nav.map((item) =>
+              {desktopNav.map((item) =>
                 "children" in item ? (
                   <li key={item.label} ref={aboutRef} className="relative">
                     <button
@@ -99,7 +118,7 @@ export function Nav() {
                       aria-current={isActive(item.href) ? "page" : undefined}
                       aria-controls="menu-tentang"
                       onClick={() => setAboutFor(aboutOpen ? null : pathname)}
-                      className={`font-heading hover:bg-surface flex min-h-11 items-center gap-1 rounded-full px-2.5 py-2 text-xs font-medium xl:text-sm ${isActive(item.href) ? "bg-lavender-50" : ""}`}
+                      className={`font-heading flex min-h-11 items-center gap-1 rounded-full px-2.5 py-2 text-xs font-medium xl:text-sm ${desktopItemClass} ${isActive(item.href) ? desktopActiveClass : ""}`}
                     >
                       {item.label}
                       <ChevronDown
@@ -111,7 +130,7 @@ export function Nav() {
                     {aboutOpen && (
                       <ul
                         id="menu-tentang"
-                        className="card absolute top-full left-0 mt-2 min-w-64 p-2"
+                        className="card text-navy absolute top-full left-0 mt-2 min-w-64 p-2"
                       >
                         {item.children.map((c) => (
                           <li key={c.href}>
@@ -133,7 +152,7 @@ export function Nav() {
                     <Link
                       href={item.href}
                       aria-current={isActive(item.href) ? "page" : undefined}
-                      className={`font-heading hover:bg-surface block min-h-11 content-center rounded-full px-2.5 py-2 text-xs font-medium xl:text-sm ${isActive(item.href) ? "bg-lavender-50" : ""}`}
+                      className={`font-heading block min-h-11 content-center rounded-full px-2.5 py-2 text-xs font-medium xl:text-sm ${desktopItemClass} ${isActive(item.href) ? desktopActiveClass : ""}`}
                     >
                       {item.label}
                     </Link>
@@ -149,6 +168,9 @@ export function Nav() {
             >
               <Phone size={18} aria-hidden="true" />
               <span>{ui.contact}</span>
+              {isHome && (
+                <span className="hidden xl:inline">{site.contact.phone}</span>
+              )}
             </a>
             <button
               ref={mobileButton}
@@ -171,7 +193,7 @@ export function Nav() {
           <nav
             id="menu-mobile"
             aria-label={ui.mobileNav}
-            className="border-line shadow-card absolute inset-x-0 max-h-[calc(100dvh-76px)] overflow-y-auto border-b bg-white lg:hidden"
+            className="border-line shadow-card text-navy absolute inset-x-0 max-h-[calc(100dvh-76px)] overflow-y-auto border-b bg-white lg:hidden"
           >
             <ul className="px-4 pb-5">
               {nav.map((item) => (

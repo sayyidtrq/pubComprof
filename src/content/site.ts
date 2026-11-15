@@ -12,11 +12,13 @@ export const site = {
   area: "Surabaya & Jawa Timur",
   contact: {
     addressShort: "Jl. Panggung No. 5, Surabaya",
-    whatsappHref: null as string | null,
     emailHref: null as string | null,
     phone: "(031) 352 2352",
     phoneHref: "tel:+62313522352",
-    whatsapp: "[PLACEHOLDER: nomor WhatsApp]",
+    whatsapp: [
+      { number: "08123268933", href: "https://wa.me/628123268933" },
+      { number: "08113391416", href: "https://wa.me/628113391416" },
+    ],
     email: "[PLACEHOLDER: email]",
     address:
       "Jl. Panggung No. 5, RT 01 / RW 011, Nyamplungan, Pabean Cantian, Surabaya, Jawa Timur 60162",
@@ -360,7 +362,13 @@ export const ui = {
   product: "Produk",
   gallery: "Galeri",
   commitment: "Komitmen & Jaminan Layanan",
+  companyProfile: "Company Profile",
   heroChip: "Company Profile 2026",
+  profileLead: "Profil",
+  profileEmphasis: "Perusahaan",
+  homeStrengths: "Satu permintaan. Satu faktur. Satu jadwal pengiriman.",
+  homeStrengthsLead:
+    "Pelanggan tidak perlu lagi berbelanja ke banyak toko atau mengumpulkan penawaran dari belasan pemasok.",
   heroStart: "Alat Tulis Kantor,",
   heroEnd: "Satu Pintu.",
   heroPoints: ["Katalog lengkap", "Harga kompetitif", "Antar terjadwal"],

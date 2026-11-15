@@ -25,7 +25,7 @@ export default function KontakPage() {
                 </a>
               </dd>
             </div>
-            <div className="card p-6">
+            <div id="whatsapp" className="card scroll-mt-24 p-6">
               <dt className="font-heading flex items-center gap-3 font-semibold">
                 <MessageCircle
                   size={24}
@@ -34,17 +34,19 @@ export default function KontakPage() {
                 />
                 {ui.whatsappLabel}
               </dt>
-              <dd className="text-muted mt-4">
-                {site.contact.whatsappHref ? (
-                  <a
-                    href={site.contact.whatsappHref}
-                    className="text-teal-700 underline"
-                  >
-                    {ui.whatsapp}
-                  </a>
-                ) : (
-                  ui.availableSoon
-                )}
+              <dd className="mt-2">
+                <ul>
+                  {site.contact.whatsapp.map(({ number, href }) => (
+                    <li key={number}>
+                      <a
+                        href={href}
+                        className="inline-flex min-h-11 items-center font-semibold text-teal-700 underline"
+                      >
+                        {number}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </dd>
             </div>
             <div className="card p-6">
