@@ -1,155 +1,133 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Check, Phone, ArrowRight } from "lucide-react";
-import { Container } from "@/components/PageHeader";
+import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/Button";
-import { SectionHeading } from "@/components/SectionHeading";
-import { CategoryCard } from "@/components/CategoryCard";
-import { ProductCard } from "@/components/ProductCard";
-import { FeatureCard } from "@/components/FeatureCard";
+import { Container } from "@/components/PageHeader";
 import { Marquee } from "@/components/Marquee";
 import { CtaBand } from "@/components/CtaBand";
 import { Faq } from "@/components/Faq";
-import {
-  alsoAvailable,
-  categories,
-  site,
-  strengths,
-  profile,
-  ui,
-} from "@/content/site";
+import { profile, site, strengths, ui } from "@/content/site";
+
 export default function Home() {
   return (
     <>
-      <section className="bg-white">
-        <Container className="grid items-center gap-10 py-10 sm:py-16 lg:grid-cols-2 lg:gap-14 lg:py-20">
-          <div>
-            <p className="chip bg-lavender-50">{ui.heroChip}</p>
-            <h1 className="h-hero mt-5">
-              {ui.heroStart} <span className="text-teal-700">{ui.heroEnd}</span>
+      <section className="bg-home-teal text-white">
+        <Container className="grid items-center gap-8 py-10 md:grid-cols-[.85fr_1.15fr] md:gap-12 md:py-16 lg:gap-16 lg:py-20">
+          <div className="min-w-0 md:col-start-2 md:row-start-1">
+            <p className="font-heading text-sm font-semibold uppercase">
+              {ui.heroChip} {"\u2013"} {site.name}
+            </p>
+            <h1 className="h-hero mt-3 !leading-[1.04] uppercase">
+              <span className="block max-w-[12ch]">{ui.heroStart}</span>{" "}
+              <span className="text-home-dark block">{ui.heroEnd}</span>
             </h1>
-            <p className="measure text-muted mt-5 text-lg">
+            <p className="mt-4 max-w-lg text-lg leading-snug font-medium">
               {site.description}
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <ButtonLink
-                href={site.contact.phoneHref}
-                icon={<Phone size={20} aria-hidden="true" />}
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <p className="bg-lavender text-home-dark rounded-btn px-4 py-2 font-semibold">
+                {ui.serving} {site.area}
+              </p>
+              <Link
+                href="/kontak#whatsapp"
+                className="btn text-home-dark hover:bg-lavender-50 bg-white"
               >
                 {ui.contact}
-              </ButtonLink>
-              <ButtonLink href="/produk-layanan" variant="secondary">
-                {ui.viewProducts}
-                <ArrowRight size={20} aria-hidden="true" />
-              </ButtonLink>
-            </div>
-            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-              {ui.heroPoints.map((p) => (
-                <li key={p} className="flex items-center gap-2">
-                  <Check
-                    className="text-teal-700"
-                    size={18}
-                    aria-hidden="true"
-                  />
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-lavender-50 grid max-w-[560px] grid-cols-2 gap-3 rounded-3xl p-3 sm:gap-4 sm:p-5">
-            {categories.map((c, i) => (
-              <Link
-                key={c.slug}
-                href={`/produk-layanan/${c.slug}`}
-                className="group rounded-card relative aspect-[4/3] overflow-hidden"
-              >
-                <Image
-                  src={c.image}
-                  alt={c.imageAlt}
-                  fill
-                  loading={i < 2 ? "eager" : "lazy"}
-                  sizes="(min-width:1024px) 250px, (min-width:640px) 240px, 42vw"
-                  className="object-cover transition-transform duration-200 group-hover:scale-105"
-                />
-                <span className="font-heading absolute right-2 bottom-2 left-2 rounded-xl bg-white px-2 py-2 text-xs font-semibold sm:text-sm">
-                  {c.name}
-                </span>
               </Link>
-            ))}
+            </div>
           </div>
-        </Container>
-      </section>
-      <Marquee />
-      <section className="section">
-        <Container>
-          <div className="card grid gap-8 p-6 sm:p-10 md:grid-cols-[.6fr_1.4fr]">
-            <div className="bg-lavender-50 flex items-center justify-center rounded-xl p-8">
+          <div className="mx-auto w-full max-w-md min-w-0 md:col-start-1 md:row-start-1">
+            <div className="grid aspect-[4/3] place-items-center overflow-hidden rounded-[2rem] bg-white p-4 shadow-lg shadow-black/15">
               <Image
                 src="/images/brand/logo.webp"
                 alt={site.name}
                 width={502}
                 height={413}
-                sizes="(min-width:768px) 240px, 65vw"
-                className="h-auto w-full max-w-60"
+                sizes="(min-width: 768px) 34vw, 90vw"
+                fetchPriority="high"
+                className="size-full min-h-0 object-contain"
               />
             </div>
-            <div className="self-center">
-              <SectionHeading title={ui.about} />
-              <p className="measure text-muted text-lg">
-                {profile.paragraphs[0]}
-              </p>
-              <ButtonLink
-                href="/tentang-kami"
-                variant="secondary"
-                className="mt-6"
-              >
-                {ui.more}
-                <ArrowRight size={20} aria-hidden="true" />
-              </ButtonLink>
-            </div>
-          </div>
-          <div className="mt-16">
-            <SectionHeading title={ui.strengths} />
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {strengths.map((f) => (
-                <FeatureCard key={f.title} feature={f} />
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {ui.heroPoints.map((point) => (
+                <li
+                  key={point}
+                  className="bg-home-dark rounded-btn px-3 py-1.5 text-sm font-semibold"
+                >
+                  {point}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </Container>
       </section>
-      <section className="section bg-navy-50">
-        <Container>
-          <SectionHeading title={ui.supplied} sub={ui.suppliedLead} />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((c) => (
-              <CategoryCard key={c.slug} category={c} />
-            ))}
+      <Marquee />
+      <section
+        aria-labelledby="home-profile"
+        className="text-home-dark relative isolate bg-white"
+      >
+        <Image
+          src="/images/gallery/alat-tulis.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="-z-10 object-cover object-center opacity-[.16]"
+        />
+        <Container className="grid items-center gap-6 py-12 md:grid-cols-[.85fr_1.15fr] md:gap-12 md:py-16 lg:gap-16">
+          <h2
+            id="home-profile"
+            className="font-heading text-4xl leading-none sm:text-5xl"
+          >
+            <span className="block font-medium italic">{ui.profileLead}</span>{" "}
+            <span className="block font-bold">{ui.profileEmphasis}</span>
+            <span
+              aria-hidden="true"
+              className="bg-home-teal mt-3 block h-1 w-28"
+            />
+          </h2>
+          <div>
+            <p className="measure text-lg">{profile.paragraphs[0]}</p>
+            <Link
+              href="/tentang-kami#profil"
+              className="btn bg-home-dark hover:bg-navy mt-4 text-white"
+            >
+              {ui.more}
+              <ArrowRight size={18} aria-hidden="true" />
+            </Link>
           </div>
-          <p className="text-muted mt-7">
-            <strong className="text-navy">{ui.also}: </strong>
-            {alsoAvailable}
-          </p>
         </Container>
       </section>
-      <section className="section">
-        <Container>
-          <SectionHeading title={ui.featured} />
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
-            {categories.flatMap((c) =>
-              c.catalog
-                .slice(0, 2)
-                .map((p) => (
-                  <ProductCard key={p.src} product={p} category={c} />
-                )),
-            )}
-          </div>
-          <div className="mt-8 text-center">
-            <ButtonLink href="/produk-layanan" variant="secondary">
-              {ui.viewAll}
-              <ArrowRight size={20} aria-hidden="true" />
+      <section aria-labelledby="home-strengths" className="bg-white">
+        <Container className="grid items-start gap-8 py-12 md:grid-cols-[.85fr_1.15fr] md:gap-12 md:py-16 lg:gap-16">
+          <div>
+            <h2 id="home-strengths" className="h-section max-w-[19ch]">
+              {ui.homeStrengths}
+            </h2>
+            <p className="measure text-muted mt-4 text-lg">
+              {ui.homeStrengthsLead}
+            </p>
+            <ButtonLink
+              href="/produk-layanan"
+              variant="secondary"
+              className="mt-6"
+            >
+              {ui.viewProducts}
+              <ArrowRight size={18} aria-hidden="true" />
             </ButtonLink>
           </div>
+          <dl className="border-line divide-line divide-y border-y">
+            {strengths.map(({ title, text }) => (
+              <div
+                key={title}
+                className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr] sm:gap-3"
+              >
+                <dt className="font-heading text-sm font-bold uppercase">
+                  {title}
+                </dt>
+                <dd className="text-muted">{text}</dd>
+              </div>
+            ))}
+          </dl>
         </Container>
       </section>
       <CtaBand />

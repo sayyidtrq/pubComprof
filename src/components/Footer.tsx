@@ -73,15 +73,18 @@ export function Footer() {
             <MapPin className="shrink-0" size={20} aria-hidden="true" />
             {site.contact.address}
           </address>
-          {site.contact.whatsappHref && (
+          {site.contact.whatsapp.map(({ number, href }) => (
             <a
-              href={site.contact.whatsappHref}
+              key={number}
+              href={href}
               className="mt-3 flex items-center gap-2"
             >
               <MessageCircle size={20} aria-hidden="true" />
-              {ui.whatsapp}
+              <span>
+                {ui.whatsappLabel} {number}
+              </span>
             </a>
-          )}
+          ))}
           {site.contact.emailHref && (
             <a
               href={site.contact.emailHref}
