@@ -17,12 +17,12 @@ export function PageHeader({
 }) {
   return (
     <section className={toneStyles[tone].tint}>
-      <Container className="py-10 sm:py-14">
+      <Container className="py-6 sm:py-8 lg:py-10">
         <Breadcrumb
           items={crumbs || [{ label: ui.home, href: "/" }, { label: title }]}
         />
         <h1 className="h-page">{title}</h1>
-        {lead && <p className="measure text-muted mt-5 text-lg">{lead}</p>}
+        {lead && <p className="measure text-muted mt-3 text-lg">{lead}</p>}
         {children}
       </Container>
     </section>

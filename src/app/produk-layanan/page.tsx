@@ -17,7 +17,7 @@ export default function ProdukPage() {
         tone="teal"
         crumbs={[{ label: ui.home, href: "/" }, { label: ui.products }]}
       />
-      <section className="section">
+      <section className="pt-6 pb-16 sm:pt-8 sm:pb-20 lg:pt-10 lg:pb-24">
         <Container className="space-y-6">
           {categories.map((c) => (
             <CategoryCard key={c.slug} category={c} wide />

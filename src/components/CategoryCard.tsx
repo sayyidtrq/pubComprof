@@ -18,7 +18,9 @@ export function CategoryCard({
         aria-hidden="true"
         className={`absolute inset-x-0 top-0 h-1 ${toneStyles[c.tone].accent}`}
       />
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+      <div
+        className={`relative overflow-hidden rounded-xl ${wide ? "aspect-video md:aspect-[16/10] md:max-h-[clamp(10rem,40svh,20rem)]" : "aspect-[4/3]"}`}
+      >
         <Image
           src={c.image}
           alt={c.imageAlt}
