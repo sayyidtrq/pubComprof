@@ -44,7 +44,7 @@ export default async function KategoriPage({
           { label: c.name },
         ]}
       />
-      <section className="section">
+      <section className="pt-6 pb-16 sm:pt-8 sm:pb-20 lg:pt-10 lg:pb-24">
         <Container>
           <nav
             aria-label={ui.categoryNav}

@@ -27,6 +27,7 @@
     0 2px 4px rgb(42 57 122 / 0.08), 0 16px 36px -16px rgb(42 57 122 / 0.3);
 }
 html {
+  --site-header-height: 4.5rem;
   scroll-behavior: smooth;
 }
 body {
@@ -146,9 +147,11 @@ a {
   .marquee-track {
     display: flex;
     width: max-content;
+    min-width: 200%;
     animation: marquee 36s linear infinite;
   }
-  .marquee:hover .marquee-track {
+  .marquee-viewport:hover .marquee-track,
+  .marquee-track[data-paused="true"] {
     animation-play-state: paused;
   }
 }
@@ -174,13 +177,16 @@ a {
   .marquee-track {
     animation: none;
     width: auto;
+    min-width: 0;
     flex-wrap: wrap;
   }
   .marquee-track > [aria-hidden="true"] {
     display: none;
   }
   .marquee-track > div {
+    flex: none;
     flex-wrap: wrap;
+    justify-content: flex-start;
     white-space: normal;
     width: 100%;
     min-width: 0;

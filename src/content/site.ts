@@ -363,6 +363,8 @@ export const ui = {
   gallery: "Galeri",
   commitment: "Komitmen & Jaminan Layanan",
   companyProfile: "Company Profile",
+  marqueePause: "Jeda teks berjalan",
+  marqueeResume: "Lanjutkan teks berjalan",
   heroChip: "Company Profile 2026",
   profileLead: "Profil",
   profileEmphasis: "Perusahaan",

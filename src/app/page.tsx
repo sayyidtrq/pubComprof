@@ -11,48 +11,48 @@ import { profile, site, strengths, ui } from "@/content/site";
 export default function Home() {
   return (
     <>
-      <section className="bg-home-teal text-white">
-        <Container className="grid items-center gap-8 py-10 md:grid-cols-[.85fr_1.15fr] md:gap-12 md:py-16 lg:gap-16 lg:py-20">
+      <section className="bg-home-teal flex min-h-[calc(100svh-var(--site-header-height))] items-center text-white">
+        <Container className="grid items-center gap-5 py-6 max-sm:pt-5 max-sm:pb-16 md:grid-cols-[.85fr_1.15fr] md:gap-12 md:py-12 lg:gap-16">
           <div className="min-w-0 md:col-start-2 md:row-start-1">
-            <p className="font-heading text-sm font-semibold uppercase">
+            <p className="font-heading text-xs leading-snug font-semibold uppercase sm:text-sm">
               {ui.heroChip} {"\u2013"} {site.name}
             </p>
             <h1 className="h-hero mt-3 !leading-[1.04] uppercase">
               <span className="block max-w-[12ch]">{ui.heroStart}</span>{" "}
               <span className="text-home-dark block">{ui.heroEnd}</span>
             </h1>
-            <p className="mt-4 max-w-lg text-lg leading-snug font-medium">
+            <p className="mt-4 max-w-lg leading-snug font-medium sm:text-lg">
               {site.description}
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <p className="bg-lavender text-home-dark rounded-btn px-4 py-2 font-semibold">
+            <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3">
+              <p className="bg-lavender text-home-dark rounded-btn px-2.5 py-2 text-xs font-semibold sm:px-4 sm:text-base">
                 {ui.serving} {site.area}
               </p>
               <Link
                 href="/kontak#whatsapp"
-                className="btn text-home-dark hover:bg-lavender-50 bg-white"
+                className="btn text-home-dark hover:bg-lavender-50 bg-white max-sm:px-3 max-sm:text-xs"
               >
                 {ui.contact}
               </Link>
             </div>
           </div>
-          <div className="mx-auto w-full max-w-md min-w-0 md:col-start-1 md:row-start-1">
-            <div className="grid aspect-[4/3] place-items-center overflow-hidden rounded-[2rem] bg-white p-4 shadow-lg shadow-black/15">
+          <div className="mx-auto w-full min-w-0 md:col-start-1 md:row-start-1 lg:max-w-[min(28rem,58svh)]">
+            <div className="mx-auto grid aspect-[4/3] w-full max-w-52 place-items-center overflow-hidden rounded-[2rem] bg-white p-3 shadow-lg shadow-black/15 sm:max-w-80 sm:p-4 lg:max-w-none">
               <Image
                 src="/images/brand/logo.webp"
                 alt={site.name}
                 width={502}
                 height={413}
-                sizes="(min-width: 768px) 34vw, 90vw"
+                sizes="(min-width: 1024px) min(448px, 58svh), (min-width: 640px) 320px, 208px"
                 fetchPriority="high"
                 className="size-full min-h-0 object-contain"
               />
             </div>
-            <ul className="mt-4 flex flex-wrap gap-2">
+            <ul className="mt-3 flex flex-wrap justify-center gap-2 md:justify-start">
               {ui.heroPoints.map((point) => (
                 <li
                   key={point}
-                  className="bg-home-dark rounded-btn px-3 py-1.5 text-sm font-semibold"
+                  className="bg-home-dark rounded-btn px-2.5 py-1.5 text-xs font-semibold sm:px-3 sm:text-sm"
                 >
                   {point}
                 </li>
