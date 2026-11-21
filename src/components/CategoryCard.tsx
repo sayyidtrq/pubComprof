@@ -12,6 +12,7 @@ export function CategoryCard({
 }) {
   return (
     <article
+      data-reveal
       className={`card-link relative overflow-hidden p-5 ${wide ? "grid gap-6 md:grid-cols-2 md:items-center" : "flex flex-col"}`}
     >
       <span
@@ -19,7 +20,7 @@ export function CategoryCard({
         className={`absolute inset-x-0 top-0 h-1 ${toneStyles[c.tone].accent}`}
       />
       <div
-        className={`relative overflow-hidden rounded-xl ${wide ? "aspect-video md:aspect-[16/10] md:max-h-[clamp(10rem,40svh,20rem)]" : "aspect-[4/3]"}`}
+        className={`img-zoom relative overflow-hidden rounded-xl ${wide ? "aspect-video md:aspect-[16/10] md:max-h-[clamp(10rem,40svh,20rem)]" : "aspect-[4/3]"}`}
       >
         <Image
           src={c.image}
@@ -38,7 +39,7 @@ export function CategoryCard({
         <p className="text-muted mt-3">{c.items}</p>
         <Link
           href={`/produk-layanan/${c.slug}`}
-          className="mt-auto inline-flex min-h-11 items-center gap-2 pt-5 font-semibold text-teal-700"
+          className="link-arrow mt-auto inline-flex min-h-11 items-center gap-2 pt-5 font-semibold text-teal-700"
         >
           {ui.collection}
           <ArrowRight size={20} aria-hidden="true" />

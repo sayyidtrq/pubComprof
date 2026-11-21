@@ -1,16 +1,19 @@
 import type { MetadataRoute } from "next";
-import { categories } from "@/content/site";
+import { getCategories } from "@/lib/catalog";
 
 const base = "https://pub-comprof.vercel.app";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const categories = await getCategories();
   const paths = [
     "",
     "/tentang-kami",
     "/produk-layanan",
-    ...categories.map((c) => `/produk-layanan/${c.slug}`),
+    ...categories.flatMap((c) => [
+      `/produk-layanan/${c.slug}`,
+      ...c.catalog.map((p) => `/produk-layanan/${c.slug}/${p.slug}`),
+    ]),
     "/galeri",
-    "/komitmen-jaminan",
     "/kontak",
   ];
   return paths.map((p) => ({ url: `${base}${p}` }));

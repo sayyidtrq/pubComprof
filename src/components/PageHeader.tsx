@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { type Tone, ui } from "@/content/site";
 import { toneStyles } from "@/content/tones";
 import { Breadcrumb, type Crumb } from "./Breadcrumb";
@@ -17,7 +17,7 @@ export function PageHeader({
 }) {
   return (
     <section className={toneStyles[tone].tint}>
-      <Container className="py-6 sm:py-8 lg:py-10">
+      <Container className="hero-in py-6 sm:py-8 lg:py-10">
         <Breadcrumb
           items={crumbs || [{ label: ui.home, href: "/" }, { label: title }]}
         />
@@ -31,12 +31,15 @@ export function PageHeader({
 export function Container({
   children,
   className = "",
-}: {
+  ...rest
+}: ComponentProps<"div"> & {
   children: ReactNode;
-  className?: string;
+  "data-reveal"?: boolean | "left" | "right" | "zoom";
+  "data-reveal-group"?: boolean;
 }) {
   return (
     <div
+      {...rest}
       className={`mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 ${className}`}
     >
       {children}

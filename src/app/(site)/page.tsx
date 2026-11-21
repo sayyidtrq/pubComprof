@@ -1,6 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, MapPin } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  BadgePercent,
+  MapPin,
+  MessageCircle,
+  PackageCheck,
+  Truck,
+} from "lucide-react";
 import { ButtonLink } from "@/components/Button";
 import { Container } from "@/components/PageHeader";
 import { Marquee } from "@/components/Marquee";
@@ -9,67 +17,66 @@ import { Faq } from "@/components/Faq";
 import { galleryItems, profile, site, strengths, ui } from "@/content/site";
 
 const profilePhoto = galleryItems[0];
+const heroIcons = [PackageCheck, BadgePercent, Truck];
 
 export default function Home() {
   return (
     <>
       <section className="bg-home-teal relative flex min-h-[calc(100svh-var(--site-header-height))] items-center text-white">
-        <Container className="grid items-center gap-5 py-6 max-sm:pt-5 max-sm:pb-16 md:grid-cols-[.85fr_1.15fr] md:gap-12 md:py-12 lg:gap-16 lg:pt-8 lg:pb-28">
-          <div className="min-w-0 md:col-start-2 md:row-start-1">
-            <p className="font-heading text-xs leading-snug font-semibold uppercase sm:text-sm">
-              {ui.heroChip} {"\u2013"} {site.name}
+        <Container className="grid items-center gap-8 py-8 max-sm:pb-16 md:grid-cols-[.8fr_1.2fr] md:gap-12 md:py-12 lg:gap-16 lg:pb-24">
+          <div className="hero-in min-w-0 md:col-start-2 md:row-start-1">
+            <p className="font-heading text-sm leading-snug font-semibold tracking-wide uppercase sm:text-base">
+              {ui.heroChip} {"–"} {site.name}
             </p>
-            <h1 className="h-hero mt-3 !leading-[1.04] uppercase">
-              <span className="block max-w-[12ch]">{ui.heroStart}</span>{" "}
+            <h1 className="h-hero mt-4 text-[clamp(2.75rem,7vw,5.75rem)] !leading-[1] uppercase">
+              <span className="block">{ui.heroStart}</span>{" "}
               <span className="text-yellow block">{ui.heroEnd}</span>
             </h1>
-            <p className="mt-4 max-w-lg leading-snug font-medium sm:text-lg">
+            <p className="mt-5 max-w-xl text-lg leading-snug font-medium sm:text-xl lg:text-2xl">
               {site.description}
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-2 sm:gap-x-5">
-              <Link
-                href="/kontak#whatsapp"
-                className="btn text-home-dark hover:bg-lavender-50 bg-white max-sm:px-3 max-sm:text-xs"
+            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <a
+                href={site.contact.waHref}
+                className="btn text-home-dark hover:bg-lavender-50 bg-white px-6 py-3.5 text-base"
               >
+                <MessageCircle size={20} aria-hidden="true" />
                 {ui.contact}
-                <ArrowRight
-                  size={18}
-                  className="max-sm:size-4"
-                  aria-hidden="true"
-                />
-              </Link>
-              <p className="inline-flex items-center gap-1 text-xs sm:gap-1.5 sm:text-sm">
-                <MapPin
-                  size={16}
-                  className="shrink-0 max-sm:size-3.5"
-                  aria-hidden="true"
-                />
+                <ArrowRight size={20} aria-hidden="true" />
+              </a>
+              <p className="inline-flex items-center gap-2 text-sm sm:text-base">
+                <MapPin size={20} className="shrink-0" aria-hidden="true" />
                 {ui.serving} {site.area}
               </p>
             </div>
+            <ul className="mt-8 grid max-w-2xl gap-3 border-t border-white/25 pt-6 sm:grid-cols-3">
+              {ui.heroPoints.map((point, i) => {
+                const Icon = heroIcons[i];
+                return (
+                  <li key={point} className="flex items-center gap-3">
+                    <span className="bg-home-dark text-yellow grid size-11 shrink-0 place-items-center rounded-xl">
+                      <Icon size={22} aria-hidden="true" />
+                    </span>
+                    <span className="font-heading text-sm leading-tight font-semibold sm:text-base">
+                      {point}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-          <div className="mx-auto w-full min-w-0 md:col-start-1 md:row-start-1 lg:max-w-[min(24rem,52svh)]">
-            <div className="mx-auto grid aspect-[4/3] w-full max-w-52 place-items-center overflow-hidden rounded-[2rem] bg-[#fdfdfd] p-2 shadow-lg shadow-black/15 sm:max-w-80 sm:p-3 lg:max-w-none">
+          <div className="hero-pop mx-auto w-full min-w-0 md:col-start-1 md:row-start-1 lg:max-w-[min(32rem,62svh)]">
+            <div className="mx-auto grid aspect-[4/3] w-full max-w-64 place-items-center overflow-hidden rounded-[2rem] bg-[#fdfdfd] p-3 shadow-2xl shadow-black/20 sm:max-w-96 lg:max-w-none">
               <Image
                 src="/images/brand/logo.webp"
                 alt={site.name}
                 width={502}
                 height={413}
-                sizes="(min-width: 1024px) min(384px, 52svh), (min-width: 640px) 320px, 208px"
+                sizes="(min-width: 1024px) min(512px, 62svh), (min-width: 640px) 384px, 256px"
                 fetchPriority="high"
                 className="h-full min-h-0 w-auto max-w-full object-contain [clip-path:inset(2px)]"
               />
             </div>
-            <ul className="mt-3 flex flex-wrap justify-center gap-2 md:justify-start lg:gap-1.5">
-              {ui.heroPoints.map((point) => (
-                <li
-                  key={point}
-                  className="bg-home-dark rounded-btn px-2.5 py-1.5 text-xs font-semibold sm:text-sm"
-                >
-                  {point}
-                </li>
-              ))}
-            </ul>
           </div>
         </Container>
         <a
@@ -77,7 +84,7 @@ export default function Home() {
           className="absolute bottom-6 left-1/2 hidden min-h-11 -translate-x-1/2 items-center gap-2 rounded-full px-3 text-sm font-semibold underline decoration-white/45 underline-offset-4 hover:decoration-white lg:inline-flex"
         >
           {ui.profile}
-          <ArrowDown size={16} aria-hidden="true" />
+          <ArrowDown size={16} className="animate-bounce" aria-hidden="true" />
         </a>
       </section>
       <Marquee />
@@ -87,7 +94,7 @@ export default function Home() {
         className="bg-navy-50 text-home-dark scroll-mt-(--site-header-height)"
       >
         <Container className="grid items-center gap-8 py-12 md:grid-cols-[1.05fr_.95fr] md:gap-12 md:py-16 lg:gap-16">
-          <div>
+          <div data-reveal="left">
             <h2
               id="home-profile"
               className="font-heading text-4xl leading-none sm:text-5xl"
@@ -108,7 +115,10 @@ export default function Home() {
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
-          <div className="rounded-card relative aspect-[16/10] overflow-hidden">
+          <div
+            data-reveal="right"
+            className="rounded-card img-zoom relative aspect-[16/10] overflow-hidden"
+          >
             <Image
               src={profilePhoto.src}
               alt={profilePhoto.alt}
@@ -121,7 +131,7 @@ export default function Home() {
       </section>
       <section aria-labelledby="home-strengths" className="bg-white">
         <Container className="grid items-start gap-8 py-12 md:grid-cols-[.85fr_1.15fr] md:gap-12 md:py-16 lg:gap-16">
-          <div>
+          <div data-reveal>
             <h2 id="home-strengths" className="h-section max-w-[19ch]">
               {ui.homeStrengths}
             </h2>
@@ -137,10 +147,14 @@ export default function Home() {
               <ArrowRight size={18} aria-hidden="true" />
             </ButtonLink>
           </div>
-          <dl className="border-line divide-line divide-y border-y">
+          <dl
+            data-reveal-group
+            className="border-line divide-line divide-y border-y"
+          >
             {strengths.map(({ title, text }) => (
               <div
                 key={title}
+                data-reveal
                 className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr] sm:gap-3"
               >
                 <dt className="font-heading text-sm font-bold uppercase">

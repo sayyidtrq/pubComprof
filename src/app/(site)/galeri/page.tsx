@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Container, PageHeader } from "@/components/PageHeader";
-import { categories, galleryNote, galleryItems, ui } from "@/content/site";
+import { galleryNote, ui } from "@/content/site";
+import { getCategories, getGallery } from "@/lib/catalog";
 import { toneStyles } from "@/content/tones";
 export const metadata: Metadata = { title: ui.gallery };
-export default function GaleriPage() {
+export default async function GaleriPage() {
+  const [categories, galleryItems] = await Promise.all([
+    getCategories(),
+    getGallery(),
+  ]);
   return (
     <>
       <PageHeader
@@ -14,14 +19,15 @@ export default function GaleriPage() {
         crumbs={[{ label: ui.home, href: "/" }, { label: ui.gallery }]}
       />
       <section className="pt-6 pb-16 sm:pt-8 sm:pb-20 lg:pt-10 lg:pb-24">
-        <Container className="grid gap-5 md:grid-cols-4">
+        <Container data-reveal-group className="grid gap-5 md:grid-cols-4">
           {galleryItems.map((it) => (
             <figure
-              key={it.src}
-              className={`card flex flex-col p-3 ${it.big ? "md:col-span-2 md:row-span-2" : ""}`}
+              key={it.id ?? it.src}
+              data-reveal
+              className={`card card-hover flex flex-col p-3 ${it.big ? "md:col-span-2 md:row-span-2" : ""}`}
             >
               <div
-                className={`relative overflow-hidden rounded-xl ${it.big ? "aspect-[16/10] md:aspect-auto md:flex-1" : "aspect-video md:max-h-[clamp(8rem,18svh,11rem)]"}`}
+                className={`img-zoom relative overflow-hidden rounded-xl ${it.big ? "aspect-[16/10] md:aspect-auto md:flex-1" : "aspect-video md:max-h-[clamp(8rem,18svh,11rem)]"}`}
               >
                 <Image
                   src={it.src}

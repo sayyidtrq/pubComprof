@@ -7,10 +7,10 @@ export function Faq() {
     <section className="section">
       <Container className="max-w-4xl">
         <SectionHeading title={ui.faq} />
-        <div className="space-y-3">
+        <div data-reveal-group className="space-y-3">
           {faqs.map((f) => (
-            <details key={f.q} className="card group">
-              <summary className="font-heading flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold [&::-webkit-details-marker]:hidden">
+            <details key={f.q} data-reveal className="card group">
+              <summary className="font-heading flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold capitalize [&::-webkit-details-marker]:hidden">
                 {f.q}
                 <ChevronDown
                   size={20}

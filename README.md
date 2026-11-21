@@ -33,3 +33,16 @@ Semua teks situs ada di `src/content/site.ts`. Data yang belum tersedia ditandai
 ## Commit
 
 Pakai Conventional Commits (`feat:`, `fix:`, `chore:`, ...). Tanpa trailer atau footer atribusi AI.
+
+## Admin & konten dinamis
+
+Produk, kategori, dan galeri dikelola di `/admin` (Supabase untuk data + login, Cloudflare R2 untuk gambar).
+
+1. Salin `.env.example` ke `.env.local` dan isi nilainya (juga di Vercel → Environment Variables).
+2. Skema database ada di `supabase/migrations/`, data awal di `supabase/seed.sql`.
+3. Buat user di Supabase → Authentication → Users, matikan sign-up publik, lalu daftarkan sebagai admin:
+   `insert into public.admins (user_id) select id from auth.users where email = '...';`
+4. R2: buat bucket, aktifkan akses publik, set CORS (izinkan `PUT` dengan header `content-type` dari domain situs), dan buat API token Object Read & Write untuk bucket itu.
+5. `vercel.json` menjalankan `/api/keepalive` setiap hari supaya project Supabase free tidak di-pause; isi `CRON_SECRET`.
+
+Tanpa env Supabase, situs memakai konten statis di `src/content/site.ts`.

@@ -1,8 +1,13 @@
 import type { NextConfig } from "next";
 
+const r2PublicUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL?.replace(/\/$/, "");
+
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
+  images: {
+    // Admin uploads are served from the public R2 bucket.
+    remotePatterns: r2PublicUrl ? [new URL(`${r2PublicUrl}/**`)] : [],
+  },
   partialPrefetching: true,
   async redirects() {
     return [
@@ -14,6 +19,11 @@ const nextConfig: NextConfig = {
       {
         source: "/tentang-kami/visi-misi",
         destination: "/tentang-kami#visi-misi",
+        permanent: true,
+      },
+      {
+        source: "/komitmen-jaminan",
+        destination: "/tentang-kami#komitmen-jaminan",
         permanent: true,
       },
       {

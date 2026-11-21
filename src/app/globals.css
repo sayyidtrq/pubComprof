@@ -28,7 +28,12 @@
 }
 html {
   --site-header-height: 4.5rem;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   scroll-behavior: smooth;
+}
+/* Lenis drives the smoothing itself; native smooth scroll would fight it. */
+html.lenis {
+  scroll-behavior: auto;
 }
 body {
   background: var(--color-surface);
@@ -56,6 +61,8 @@ a {
     font-family: var(--font-heading);
     line-height: 1.2;
     text-wrap: balance;
+    /* Headlines are Title Case site-wide, including admin-entered names. */
+    text-transform: capitalize;
   }
   .h-hero {
     font-size: clamp(2.25rem, 5vw, 3.75rem);
@@ -88,7 +95,25 @@ a {
     font-weight: 600;
     transition:
       background-color 200ms,
-      color 200ms;
+      color 200ms,
+      transform 200ms var(--ease-out),
+      box-shadow 200ms;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -10px rgb(16 42 48 / 0.45);
+  }
+  .btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  .btn > svg:last-child:not(:first-child),
+  .link-arrow > svg {
+    transition: transform 200ms var(--ease-out);
+  }
+  .btn:hover > svg:last-child:not(:first-child),
+  .link-arrow:hover > svg {
+    transform: translateX(3px);
   }
   .btn-primary {
     background: var(--color-yellow);
@@ -119,14 +144,25 @@ a {
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
   }
-  .card-link {
+  .card-link,
+  .card-hover {
     transition:
-      transform 200ms,
-      box-shadow 200ms;
+      transform 300ms var(--ease-out),
+      box-shadow 300ms var(--ease-out);
   }
-  .card-link:hover {
-    transform: translateY(-2px);
+  .card-link:hover,
+  .card-hover:hover {
+    transform: translateY(-4px);
     box-shadow: var(--shadow-card-hover);
+  }
+  /* Photos ease in slightly when their card is hovered. */
+  .img-zoom img {
+    transition: transform 600ms var(--ease-out);
+  }
+  .card-link:hover .img-zoom img,
+  .card-hover:hover .img-zoom img,
+  .img-zoom:hover img {
+    transform: scale(1.04);
   }
   .chip {
     display: inline-flex;
@@ -140,6 +176,26 @@ a {
   }
   .measure {
     max-inline-size: 68ch;
+  }
+  .admin-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .admin-input {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    margin-top: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-btn);
+    background: white;
+    color: var(--color-navy);
+  }
+  .admin-input:focus-visible {
+    outline-offset: 0;
   }
   .section {
     padding-block: 4rem;
@@ -163,6 +219,68 @@ a {
 @media (min-width: 1024px) {
   .section {
     padding-block: 6rem;
+  }
+}
+/* Stagger for Motion scroll reveals (read as --reveal-delay). */
+[data-reveal-group] > :nth-child(2) {
+  --reveal-delay: 80ms;
+}
+[data-reveal-group] > :nth-child(3) {
+  --reveal-delay: 160ms;
+}
+[data-reveal-group] > :nth-child(4) {
+  --reveal-delay: 240ms;
+}
+[data-reveal-group] > :nth-child(5) {
+  --reveal-delay: 320ms;
+}
+[data-reveal-group] > :nth-child(n + 6) {
+  --reveal-delay: 400ms;
+}
+/* First-paint entrance for hero content; ends fully visible without JS. */
+.hero-in > * {
+  animation: rise 800ms var(--ease-out) both;
+}
+.hero-in > :nth-child(2) {
+  animation-delay: 90ms;
+}
+.hero-in > :nth-child(3) {
+  animation-delay: 180ms;
+}
+.hero-in > :nth-child(4) {
+  animation-delay: 270ms;
+}
+.hero-pop {
+  animation: pop 900ms var(--ease-out) 120ms both;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 1.25rem;
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+/* Route changes: the old page fades out fast, the new one rises in. */
+::view-transition-old(.page) {
+  animation: 160ms ease-in both page-out;
+}
+::view-transition-new(.page) {
+  animation: 420ms var(--ease-out) 80ms both page-in;
+}
+@keyframes page-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    translate: 0 1rem;
   }
 }
 @keyframes marquee {
@@ -198,7 +316,12 @@ a {
     gap: 1rem;
     padding-right: 0;
   }
-  * {
+  *,
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
     transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
   }
 }

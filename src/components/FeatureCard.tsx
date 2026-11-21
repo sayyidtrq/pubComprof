@@ -21,7 +21,7 @@ export function FeatureCard({
 }) {
   const Icon = icons[feature.icon];
   return (
-    <article className="card h-full p-6">
+    <article data-reveal className="card card-hover h-full p-6">
       <div className="flex items-center justify-between">
         <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
           <Icon size={24} strokeWidth={1.75} aria-hidden="true" />

@@ -1,16 +1,20 @@
 import Image from "next/image";
-import { type Category, site, ui } from "@/content/site";
+import Link from "next/link";
+import type { Category, Product } from "@/content/site";
 import { toneStyles } from "@/content/tones";
 export function ProductCard({
   product,
   category,
 }: {
-  product: Category["catalog"][number];
+  product: Product;
   category: Category;
 }) {
   return (
-    <article className="card flex h-full min-w-0 flex-col p-3 sm:p-4">
-      <div className="relative aspect-square rounded-xl bg-white">
+    <article
+      data-reveal
+      className="card card-hover relative flex h-full min-w-0 flex-col p-3 sm:p-4"
+    >
+      <div className="img-zoom relative aspect-square overflow-hidden rounded-xl bg-white">
         <Image
           src={product.src}
           alt={product.alt}
@@ -26,13 +30,15 @@ export function ProductCard({
         />
         {category.name}
       </p>
-      <h3 className="h-card mt-2 break-words">{product.name}</h3>
-      <a
-        className="mt-auto pt-4 text-sm font-semibold text-teal-700 underline"
-        href={site.contact.phoneHref}
-      >
-        {ui.price}
-      </a>
+      <h3 className="h-card mt-2 break-words">
+        {/* The ::after overlay makes the whole card open the detail page. */}
+        <Link
+          href={`/produk-layanan/${category.slug}/${product.slug}`}
+          className="after:absolute after:inset-0 after:rounded-[inherit] after:content-['']"
+        >
+          {product.name}
+        </Link>
+      </h3>
     </article>
   );
 }
