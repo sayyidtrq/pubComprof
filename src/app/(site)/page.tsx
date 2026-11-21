@@ -25,10 +25,7 @@ export default function Home() {
       <section className="bg-home-teal relative flex min-h-[calc(100svh-var(--site-header-height))] items-center text-white">
         <Container className="grid items-center gap-8 py-8 max-sm:pb-16 md:grid-cols-[.8fr_1.2fr] md:gap-12 md:py-12 lg:gap-16 lg:pb-24">
           <div className="hero-in min-w-0 md:col-start-2 md:row-start-1">
-            <p className="font-heading text-sm leading-snug font-semibold tracking-wide uppercase sm:text-base">
-              {ui.heroChip} {"–"} {site.name}
-            </p>
-            <h1 className="h-hero mt-4 text-[clamp(2.75rem,7vw,5.75rem)] !leading-[1] uppercase">
+            <h1 className="h-hero text-[clamp(2.75rem,7vw,5.75rem)] !leading-[1] uppercase">
               <span className="block">{ui.heroStart}</span>{" "}
               <span className="text-yellow block">{ui.heroEnd}</span>
             </h1>

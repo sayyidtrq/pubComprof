@@ -422,7 +422,6 @@ export const ui = {
   companyProfile: "Company Profile",
   marqueePause: "Jeda teks berjalan",
   marqueeResume: "Lanjutkan teks berjalan",
-  heroChip: "Company Profile 2026",
   profileLead: "Profil",
   profileEmphasis: "Perusahaan",
   homeStrengths: "Satu permintaan. Satu faktur. Satu jadwal pengiriman.",
