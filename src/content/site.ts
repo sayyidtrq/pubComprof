@@ -13,8 +13,9 @@ export const site = {
   contact: {
     addressShort: "Jl. Panggung No. 5, Surabaya",
     emailHref: null as string | null,
-    phone: "(031) 352 2352",
-    phoneHref: "tel:+62313522352",
+    // All contact buttons go to WhatsApp; the first number is the primary admin.
+    waHref: "https://wa.me/628123268933",
+    waNumber: "0812 3268 933",
     whatsapp: [
       { number: "08123268933", href: "https://wa.me/628123268933" },
       { number: "08113391416", href: "https://wa.me/628113391416" },
@@ -39,17 +40,31 @@ export const nav = [
         label: "Struktur Organisasi",
         href: "/tentang-kami#struktur-organisasi",
       },
+      {
+        label: "Komitmen & Jaminan",
+        href: "/tentang-kami#komitmen-jaminan",
+      },
     ],
   },
   { label: "Produk & Layanan", href: "/produk-layanan" },
   { label: "Galeri", href: "/galeri" },
-  { label: "Komitmen & Jaminan", href: "/komitmen-jaminan" },
   { label: "Kontak", href: "/kontak" },
 ] as const;
 
 export type Tone = "teal" | "navy" | "lavender" | "yellow";
 
+export type Product = {
+  id?: string;
+  slug: string;
+  code: string;
+  name: string;
+  description: string;
+  src: string;
+  alt: string;
+};
+
 export type Category = {
+  id?: string;
   slug: string;
   code: string;
   name: string;
@@ -57,10 +72,38 @@ export type Category = {
   items: string;
   image: string;
   imageAlt: string;
+  catalog: Product[];
+};
+
+export type GalleryItem = {
+  id?: string;
+  title: string;
+  text: string;
+  src: string;
+  alt: string;
+  big: boolean;
+};
+
+/** Lowercase, hyphenated URL segment: "Kertas & cetak" -> "kertas-dan-cetak". */
+export function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/&/g, " dan ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+type StaticCategory = Omit<Category, "catalog"> & {
   catalog: { src: string; alt: string; name: string }[];
 };
 
-export const categories: Category[] = [
+/**
+ * Bundled copy of the catalog. The site reads Supabase when it is configured;
+ * this is the fallback for local work without credentials and the seed source.
+ */
+const staticCategories: StaticCategory[] = [
   {
     slug: "alat-tulis",
     code: "A",
@@ -217,6 +260,16 @@ export const categories: Category[] = [
   },
 ];
 
+export const categories: Category[] = staticCategories.map((c) => ({
+  ...c,
+  catalog: c.catalog.map((p) => ({
+    ...p,
+    slug: slugify(p.name),
+    code: "",
+    description: "",
+  })),
+}));
+
 export const alsoAvailable =
   "Tinta & toner printer, baterai, tisu, papan tulis, dan aksesori presentasi.";
 
@@ -258,7 +311,7 @@ export const profile = {
       "Alamat",
       "Jl. Panggung No. 5, RT 01 / RW 011, Nyamplungan, Pabean Cantian, Surabaya, Jawa Timur",
     ],
-    ["Telepon", "(031) 352 2352"],
+    ["WhatsApp", "0812 3268 933 · 0811 3391 416"],
   ],
 } as const;
 
@@ -343,7 +396,11 @@ export const faqs = [
   { q: "Siapa saja pelanggan PUB?", a: profile.paragraphs[0] },
   {
     q: "Bagaimana cara meminta penawaran?",
-    a: "Hubungi admin di " + site.contact.phone + ". " + contactCopy.body,
+    a:
+      "Hubungi admin melalui WhatsApp di " +
+      site.contact.whatsapp.map((w) => w.number).join(" atau ") +
+      ". " +
+      contactCopy.body,
   },
   {
     q: "Bagaimana pengiriman barang?",
@@ -381,6 +438,14 @@ export const ui = {
   featured: "Produk pilihan",
   viewAll: "Lihat semua produk",
   price: "Hubungi kami untuk harga",
+  productCode: "Kode produk",
+  productCategory: "Kategori",
+  productAsk: "Tanyakan produk ini",
+  productAskText: "Halo, saya ingin menanyakan harga dan ketersediaan",
+  productFallback:
+    "Hubungi kami untuk informasi ukuran, varian, harga grosir, dan ketersediaan stok.",
+  productRelated: "Produk lain di kategori ini",
+  productBack: "Kembali ke",
   supplied: "Yang Kami Sediakan",
   suppliedLead:
     "Kelompok barang yang menutup hampir seluruh belanja ATK bulanan sebuah kantor.",
@@ -388,10 +453,8 @@ export const ui = {
   also: "Juga tersedia",
   faq: "Pertanyaan yang sering diajukan",
   cta: "Butuh penawaran untuk pembelian partai besar?",
-  telephone: "Telepon kami",
   whatsapp: "Chat WhatsApp",
   availableSoon: "Segera tersedia",
-  phoneLabel: "Telepon admin",
   whatsappLabel: "WhatsApp",
   emailLabel: "Email",
   addressLabel: "Alamat",
@@ -424,14 +487,12 @@ export const ui = {
   breadcrumb: "Breadcrumb",
 };
 
-export const galleryItems = [
+export const galleryItems: GalleryItem[] = [
   {
     src: "/images/gallery/alat-tulis.webp",
     alt: "Pulpen, spidol, dan buku catatan di atas meja",
     title: "Alat tulis & perlengkapan meja",
     text: "Pulpen, pensil, spidol, stapler, gunting, lem, dan aksesori meja kerja untuk kebutuhan harian.",
-    w: 665,
-    h: 375,
     big: true,
   },
   {
@@ -439,31 +500,27 @@ export const galleryItems = [
     alt: "Kardus kertas HVS Copy Paper",
     title: "Kertas & cetak",
     text: "HVS A4/F4, continuous form.",
-    w: 289,
-    h: 175,
+    big: false,
   },
   {
     src: "/images/gallery/filing-arsip.webp",
     alt: "Map filing berwarna-warni",
     title: "Filing & arsip",
     text: "Ordner, map, sekat, label.",
-    w: 276,
-    h: 175,
+    big: false,
   },
   {
     src: "/images/gallery/stapler-clips.webp",
     alt: "Stapler, tape dispenser, penggaris, dan gunting",
     title: "Stapler & clips",
     text: "",
-    w: 289,
-    h: 172,
+    big: false,
   },
   {
     src: "/images/gallery/paket-set-kantor.webp",
     alt: "Paket set kantor warna merah muda",
     title: "Paket set kantor",
     text: "",
-    w: 276,
-    h: 172,
+    big: false,
   },
 ];

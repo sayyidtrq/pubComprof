@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
-import { Building2, Briefcase, Landmark, MapPin, Phone } from "lucide-react";
+import {
+  Building2,
+  Briefcase,
+  CircleCheck,
+  Clock,
+  Landmark,
+  MapPin,
+  MessageCircle,
+  Package,
+  Truck,
+} from "lucide-react";
+import { CtaBand } from "@/components/CtaBand";
 import { Container, PageHeader } from "@/components/PageHeader";
 import { FeatureCard } from "@/components/FeatureCard";
 import {
+  commitments,
+  delivery,
   missions,
   orgChart,
   profile,
@@ -14,7 +27,8 @@ import {
 export const metadata: Metadata = { title: ui.about };
 const box =
   "rounded-btn border-2 border-navy bg-white px-2 py-3 text-center font-heading text-sm font-semibold sm:px-6 sm:text-xl";
-const identityIcons = [Building2, Briefcase, Landmark, MapPin, Phone];
+const deliveryIcons = [Package, Truck, MapPin, Clock];
+const identityIcons = [Building2, Briefcase, Landmark, MapPin, MessageCircle];
 export default function TentangKamiPage() {
   return (
     <>
@@ -37,7 +51,7 @@ export default function TentangKamiPage() {
         aria-labelledby="h-profil"
       >
         <Container className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
-          <div>
+          <div data-reveal="left">
             <h2 id="h-profil" className="h-section">
               {ui.profile}
             </h2>
@@ -50,6 +64,7 @@ export default function TentangKamiPage() {
             </div>
           </div>
           <aside
+            data-reveal="right"
             className="card self-start p-6 sm:p-8"
             aria-labelledby="identitas"
           >
@@ -66,7 +81,13 @@ export default function TentangKamiPage() {
                       {k}
                     </dt>
                     <dd className="mt-1 font-medium">
-                      {i === 4 ? <a href={site.contact.phoneHref}>{v}</a> : v}
+                      {i === 4 ? (
+                        <a href={site.contact.waHref} className="underline">
+                          {v}
+                        </a>
+                      ) : (
+                        v
+                      )}
                     </dd>
                   </div>
                 );
@@ -78,7 +99,10 @@ export default function TentangKamiPage() {
       </section>
       <section id="visi-misi" className="scroll-mt-24" aria-labelledby="h-visi">
         <Container>
-          <div className="rounded-card bg-navy p-6 text-white sm:p-10 lg:p-12">
+          <div
+            data-reveal
+            className="rounded-card bg-navy p-6 text-white sm:p-10 lg:p-12"
+          >
             <h2 id="h-visi" className="h-section">
               {ui.vision}
             </h2>
@@ -91,7 +115,7 @@ export default function TentangKamiPage() {
           </div>
           <div className="section">
             <h2 className="h-section">{ui.missions}</h2>
-            <ol className="mt-8 grid gap-5 sm:grid-cols-2">
+            <ol data-reveal-group className="mt-8 grid gap-5 sm:grid-cols-2">
               {missions.map((m, i) => (
                 <li key={m.title}>
                   <FeatureCard feature={m} number={i + 1} />
@@ -110,7 +134,7 @@ export default function TentangKamiPage() {
           <h2 id="h-struktur" className="h-section">
             {ui.structure}
           </h2>
-          <figure className="card mt-8 p-4 py-8 sm:p-10">
+          <figure data-reveal="zoom" className="card mt-8 p-4 py-8 sm:p-10">
             <div
               className="mx-auto flex max-w-3xl flex-col items-center"
               role="img"
@@ -144,6 +168,65 @@ export default function TentangKamiPage() {
           </figure>
         </Container>
       </section>
+      <section
+        id="komitmen-jaminan"
+        className="section scroll-mt-24"
+        aria-labelledby="h-komitmen"
+      >
+        <Container>
+          <div data-reveal className="mb-8">
+            <h2 id="h-komitmen" className="h-section">
+              {ui.commitment}
+            </h2>
+            <p className="measure text-muted mt-3 text-lg">
+              {ui.commitmentLead}
+            </p>
+          </div>
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div>
+              <h3 className="h-card">{ui.commitments}</h3>
+              <ul data-reveal-group className="mt-5 space-y-4">
+                {commitments.map((c) => (
+                  <li key={c} data-reveal className="card flex gap-4 p-5">
+                    <CircleCheck
+                      size={24}
+                      className="shrink-0 text-teal-700"
+                      aria-hidden="true"
+                    />
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div
+              data-reveal="right"
+              className="rounded-card bg-navy self-start p-6 text-white sm:p-9"
+            >
+              <h3 className="h-section">{delivery.title}</h3>
+              <p className="mt-5">{delivery.lead}</p>
+              <ul className="mt-6 space-y-6">
+                {delivery.points.map((p, i) => {
+                  const Icon = deliveryIcons[i];
+                  return (
+                    <li key={p} className="flex gap-4">
+                      <Icon
+                        size={24}
+                        className="text-yellow shrink-0"
+                        aria-hidden="true"
+                      />
+                      <span>{p}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <p className="mt-8 border-t border-white/20 pt-6">
+                {delivery.closing}
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+      <CtaBand />
     </>
   );
 }

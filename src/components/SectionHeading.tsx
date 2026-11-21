@@ -8,7 +8,7 @@ export function SectionHeading({
   center?: boolean;
 }) {
   return (
-    <div className={`mb-8 ${center ? "text-center" : ""}`}>
+    <div data-reveal className={`mb-8 ${center ? "text-center" : ""}`}>
       <h2 className="h-section">{title}</h2>
       {sub && (
         <p

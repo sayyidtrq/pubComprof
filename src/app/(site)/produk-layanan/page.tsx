@@ -5,10 +5,12 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
 import { FeatureCard } from "@/components/FeatureCard";
-import { alsoAvailable, categories, strengths, ui } from "@/content/site";
+import { alsoAvailable, strengths, ui } from "@/content/site";
+import { getCategories } from "@/lib/catalog";
 import { toneStyles } from "@/content/tones";
 export const metadata: Metadata = { title: ui.products };
-export default function ProdukPage() {
+export default async function ProdukPage() {
+  const categories = await getCategories();
   return (
     <>
       <PageHeader
@@ -41,10 +43,13 @@ export default function ProdukPage() {
               </Link>
             ))}
           </nav>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
+          <div
+            data-reveal-group
+            className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4"
+          >
             {categories.flatMap((c) =>
               c.catalog.map((p) => (
-                <ProductCard key={p.src} product={p} category={c} />
+                <ProductCard key={p.id ?? p.slug} product={p} category={c} />
               )),
             )}
           </div>
@@ -53,12 +58,15 @@ export default function ProdukPage() {
       <section className="section">
         <Container>
           <SectionHeading title={ui.strengths} />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            data-reveal-group
+            className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          >
             {strengths.map((f) => (
               <FeatureCard key={f.title} feature={f} />
             ))}
           </div>
-          <div className="card mt-8 p-6">
+          <div data-reveal className="card mt-8 p-6">
             <h2 className="h-card">{ui.also}</h2>
             <p className="text-muted mt-2">{alsoAvailable}</p>
           </div>

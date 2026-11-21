@@ -44,7 +44,7 @@ Kartu radius 16px, gambar 12px, tombol 10px, chip pill. Bayangan kartu: 0 1px 2p
 
 ## Aksesibilitas dan isi
 
-Fokus kuning dengan ring navy, skip link, aria-current, aria-expanded, alt, landmark dan breadcrumb dipertahankan. Ikon dekoratif aria-hidden. Tidak ada animasi yang menyembunyikan isi, slider, gradient, emoji, atau statistik buatan. Semua teks situs berasal dari src/content/site.ts; teks PDF lama dipertahankan. Nomor WhatsApp dan email tetap placeholder pada data. Font dan gambar mengikuti panduan Next.js lokal; gambar menggunakan sizes dan preload atau eager untuk konten awal.
+Fokus kuning dengan ring navy, skip link, aria-current, aria-expanded, alt, landmark dan breadcrumb dipertahankan. Ikon dekoratif aria-hidden. Animasi hanya progressive enhancement: reveal saat scroll (`data-reveal`, `data-reveal-group`) dijalankan `Motion` lewat Web Animations API (tanpa mengubah atribut DOM, aman untuk hidrasi) dan hanya aktif bila JS jalan dan reduced motion mati, elemen yang sudah terlihat saat muat tidak disembunyikan; hero memakai keyframe CSS yang berakhir terlihat; smooth scroll memakai Lenis; perpindahan halaman memakai React `ViewTransition`; semuanya mati pada reduced motion. Tidak ada slider, gradient, emoji, atau statistik buatan. Semua teks situs berasal dari src/content/site.ts; teks PDF lama dipertahankan. Nomor WhatsApp dan email tetap placeholder pada data. Font dan gambar mengikuti panduan Next.js lokal; gambar menggunakan sizes dan preload atau eager untuk konten awal.
 
 ## Aset
 

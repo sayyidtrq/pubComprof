@@ -5,11 +5,16 @@ import { toneStyles } from "@/content/tones";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, PageHeader } from "@/components/PageHeader";
-import { categories, site, ui } from "@/content/site";
+import { site, ui } from "@/content/site";
+import { getCategories } from "@/lib/catalog";
 
 type Params = { kategori: string };
 
-export function generateStaticParams(): Params[] {
+// Catalog data is cached, so waiting for it beats flashing a skeleton.
+export const instant = false;
+
+export async function generateStaticParams(): Promise<Params[]> {
+  const categories = await getCategories();
   return categories.map((c) => ({ kategori: c.slug }));
 }
 
@@ -19,7 +24,7 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { kategori } = await params;
-  const c = categories.find((x) => x.slug === kategori);
+  const c = (await getCategories()).find((x) => x.slug === kategori);
   return { title: c ? c.name : ui.product };
 }
 
@@ -29,6 +34,7 @@ export default async function KategoriPage({
   params: Promise<Params>;
 }) {
   const { kategori } = await params;
+  const categories = await getCategories();
   const c = categories.find((x) => x.slug === kategori);
   if (!c) notFound();
 
@@ -61,13 +67,16 @@ export default async function KategoriPage({
               </Link>
             ))}
           </nav>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
+          <div
+            data-reveal-group
+            className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4"
+          >
             {c.catalog.map((p) => (
-              <ProductCard key={p.src} product={p} category={c} />
+              <ProductCard key={p.id ?? p.slug} product={p} category={c} />
             ))}
           </div>
           <a
-            href={site.contact.phoneHref}
+            href={site.contact.waHref}
             className="mt-8 inline-block font-semibold text-teal-700 underline"
           >
             {ui.price}

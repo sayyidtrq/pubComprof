@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Phone, MessageCircle, Mail, MapPin } from "lucide-react";
+import { MessageCircle, Mail, MapPin } from "lucide-react";
 import { Container, PageHeader } from "@/components/PageHeader";
 import { contactCopy, site, ui, nav } from "@/content/site";
-export const metadata: Metadata = { title: nav[5].label };
+export const metadata: Metadata = { title: nav[4].label };
 export default function KontakPage() {
   return (
     <>
@@ -10,22 +10,11 @@ export default function KontakPage() {
       <section className="section">
         <Container>
           <p className="measure text-muted text-lg">{contactCopy.body}</p>
-          <dl className="mt-9 grid gap-5 sm:grid-cols-2">
-            <div className="card p-6">
-              <dt className="font-heading flex items-center gap-3 font-semibold">
-                <Phone size={24} className="text-teal-700" aria-hidden="true" />
-                {ui.phoneLabel}
-              </dt>
-              <dd className="mt-4">
-                <a
-                  href={site.contact.phoneHref}
-                  className="font-heading text-2xl font-semibold text-teal-700 underline"
-                >
-                  {site.contact.phone}
-                </a>
-              </dd>
-            </div>
-            <div id="whatsapp" className="card scroll-mt-24 p-6">
+          <dl
+            data-reveal-group
+            className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            <div id="whatsapp" data-reveal className="card scroll-mt-24 p-6">
               <dt className="font-heading flex items-center gap-3 font-semibold">
                 <MessageCircle
                   size={24}
@@ -49,7 +38,7 @@ export default function KontakPage() {
                 </ul>
               </dd>
             </div>
-            <div className="card p-6">
+            <div data-reveal className="card p-6">
               <dt className="font-heading flex items-center gap-3 font-semibold">
                 <Mail size={24} className="text-teal-700" aria-hidden="true" />
                 {ui.emailLabel}
@@ -67,7 +56,7 @@ export default function KontakPage() {
                 )}
               </dd>
             </div>
-            <div className="card p-6">
+            <div data-reveal className="card p-6">
               <dt className="font-heading flex items-center gap-3 font-semibold">
                 <MapPin
                   size={24}
@@ -81,7 +70,7 @@ export default function KontakPage() {
               </dd>
             </div>
           </dl>
-          <div className="card mt-10 overflow-hidden">
+          <div data-reveal className="card mt-10 overflow-hidden">
             <iframe
               title={ui.mapTitle}
               src={site.contact.mapsEmbed}

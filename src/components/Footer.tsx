@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, MapPin, Mail, MessageCircle } from "lucide-react";
-import { categories, nav, site, ui } from "@/content/site";
+import { MapPin, Mail, MessageCircle } from "lucide-react";
+import { nav, site, ui } from "@/content/site";
+import { getCategories } from "@/lib/catalog";
 import { Container } from "./PageHeader";
-export function Footer() {
+export async function Footer() {
+  const categories = await getCategories();
   return (
     <footer className="bg-navy pb-20 text-white sm:pb-0">
       <div className="flex h-2" aria-hidden="true">
@@ -27,7 +29,9 @@ export function Footer() {
           <p className="mt-3 max-w-sm text-sm">{site.description}</p>
         </div>
         <div>
-          <h2 className="font-heading text-yellow font-semibold">{ui.pages}</h2>
+          <h2 className="font-heading text-yellow font-semibold capitalize">
+            {ui.pages}
+          </h2>
           <ul className="mt-4 space-y-2 text-sm">
             {nav.map((n) => (
               <li key={n.href}>
@@ -42,7 +46,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h2 className="font-heading text-yellow font-semibold">
+          <h2 className="font-heading text-yellow font-semibold capitalize">
             {ui.product}
           </h2>
           <ul className="mt-4 space-y-2 text-sm">
@@ -59,17 +63,10 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h2 className="font-heading text-yellow font-semibold">
+          <h2 className="font-heading text-yellow font-semibold capitalize">
             {ui.contact}
           </h2>
-          <a
-            className="mt-4 flex items-center gap-2 py-2 font-semibold"
-            href={site.contact.phoneHref}
-          >
-            <Phone size={20} aria-hidden="true" />
-            {site.contact.phone}
-          </a>
-          <address className="mt-3 flex gap-2 text-sm not-italic">
+          <address className="mt-4 flex gap-2 text-sm not-italic">
             <MapPin className="shrink-0" size={20} aria-hidden="true" />
             {site.contact.address}
           </address>

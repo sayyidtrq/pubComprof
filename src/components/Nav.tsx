@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, Phone, ChevronDown, FileText } from "lucide-react";
+import { Menu, X, MessageCircle, ChevronDown, FileText } from "lucide-react";
 import { nav, site, ui } from "@/content/site";
 
 export function Nav() {
@@ -131,12 +131,12 @@ export function Nav() {
         </nav>
         <div className="flex shrink-0 items-center gap-2">
           <a
-            href={site.contact.phoneHref}
+            href={site.contact.waHref}
             className="btn btn-primary hidden sm:inline-flex"
           >
-            <Phone size={18} aria-hidden="true" />
+            <MessageCircle size={18} aria-hidden="true" />
             <span>{ui.contact}</span>
-            <span className="hidden 2xl:inline">{site.contact.phone}</span>
+            <span className="hidden 2xl:inline">{site.contact.waNumber}</span>
           </a>
           <button
             ref={mobileButton}
@@ -158,6 +158,7 @@ export function Nav() {
       {mobileOpen && (
         <nav
           id="menu-mobile"
+          data-lenis-prevent
           aria-label={ui.mobileNav}
           className="border-line shadow-card text-navy absolute inset-x-0 top-full max-h-[calc(100dvh-var(--site-header-height))] overflow-y-auto overscroll-contain border-b bg-white xl:hidden"
         >
@@ -190,12 +191,9 @@ export function Nav() {
               </li>
             ))}
             <li className="pt-4">
-              <a
-                href={site.contact.phoneHref}
-                className="btn btn-primary w-full"
-              >
-                <Phone size={18} aria-hidden="true" />
-                {ui.telephone} {site.contact.phone}
+              <a href={site.contact.waHref} className="btn btn-primary w-full">
+                <MessageCircle size={18} aria-hidden="true" />
+                {ui.whatsapp} {site.contact.waNumber}
               </a>
             </li>
           </ul>
